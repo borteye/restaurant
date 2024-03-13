@@ -10,6 +10,7 @@ module.exports = {
         secondary: "#9b9999",
         gradientStart: "#e50525",
         gradientEnd: "#89030e",
+        overlay: "#000000d2",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
