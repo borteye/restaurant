@@ -5,15 +5,17 @@ import LandingPage from "./pages/LandingPage";
 
 function App() {
   return (
-    <div className="h-screen bg-heroImage bg-cover bg-center">
-      <div className="h-full flex flex-col justify-between bg-overlay text-light px-32 py-6 relative">
+    <div className="h-full md:h-screen bg-heroImage bg-cover bg-center">
+      <div className=" h-full flex flex-col items-center justify-between gap-y-12  bg-overlay text-light px-16 py-6 relative">
         <Navbar />
-        <LandingPage />
-        <img
-          src={tomato}
-          alt="tomato"
-          className="absolute w-60  filter blur-[2px] top-[26.4rem] -left-[8rem]"
-        />
+        <div className="h-full flex items-center justify-center">
+          <LandingPage />
+          <img
+            src={tomato}
+            alt="tomato"
+            className="absolute w-32  filter blur-[1px] bottom-[0.5rem]  -left-[4.5rem] "
+          />
+        </div>
       </div>
     </div>
   );
