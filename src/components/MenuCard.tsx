@@ -7,13 +7,13 @@ type Props = {};
 const MenuCard = (props: Props) => {
   return (
     <>
-      <div className="text-light rounded-xl z-10  border bg-heroImage bg-cover bg-center ">
+      <div className="text-light rounded-xl z-10 shadow-[0_3px_10px_rgb(0,0,0,0.2)] bg-heroImage bg-cover bg-center ">
         <div className="bg-[#0000008c] flex flex-col gap-y-4 justify-center items-center  rounded-xl px-4 py-4">
           <div className="w-full">
             <p className="font-bold">26.90 zt</p>
           </div>
 
-          <img src={burger} alt="burger" className="w-20" />
+          <img src={burger} alt="burger" className="lg:w-32 w-20" />
           <div>
             <h1 className="font-bold">Burger Czarnuszek</h1>
             <p className="text-sm w-full text-secondary  text-ellipsis leading-none">
