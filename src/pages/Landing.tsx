@@ -36,13 +36,13 @@ const LandingPage = (props: Props) => {
           <img
             src={chili}
             alt="pepper"
-            className="w-28 transform scale-x-[-1] filter blur-[1px] absolute top-24 -right-5 "
+            className="w-28 lg:w-48 transform scale-x-[-1] filter blur-[1px] average:blur-[1.5px] absolute top-24 -right-5 lg:-right-24 "
           />
         </div>
       </div>
-      <div className="relative max-w-[30rem]   w-full flex flex-col justify-between items-center">
+      <div className="relative max-w-[30rem]   w-full flex flex-col justify-center items-center">
         <img src={burger} alt="burger" className=" " />
-        <div className="flex items-end gap-x-6">
+        <div className="flex items-end justify-end px-10 w-full gap-x-6">
           <div className="flex gap-x-2">
             <ArrowLongLeftIcon className="w-6 h-6 text-primary" />
             <ArrowLongRightIcon className="w-6 h-6" />

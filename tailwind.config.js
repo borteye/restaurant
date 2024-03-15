@@ -13,6 +13,9 @@ module.exports = {
         gradientEnd: "#89030e",
         overlay: "#000000d2",
         new: "#ea9012",
+        count: "#3c3c44",
+        cartGradientStart: "#a9be5e",
+        cartGradientEnd: "#6d7c3c",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
@@ -27,6 +30,7 @@ module.exports = {
         heroImage: "url(/src/assets/texture-bg.png)",
       },
       screens: {
+        xs: "475px",
         average: "1032px",
       },
     },

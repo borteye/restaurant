@@ -1,15 +1,17 @@
 import React from "react";
 import tomato from "./assets/tomato.png";
 import Navbar from "./components/Navbar";
-import LandingPage from "./pages/LandingPage";
+import LandingPage from "./pages/Landing";
+import Menu from "./pages/Menu";
 
 function App() {
   return (
     <div className="h-full md:h-screen bg-heroImage bg-cover bg-center">
       <div className=" h-full flex flex-col items-center justify-between gap-y-12  bg-overlay text-light px-16 py-6 relative">
         <Navbar />
-        <div className="h-full flex items-center justify-center">
+        <div className="h-full flex flex-col items-center justify-center">
           <LandingPage />
+
           <img
             src={tomato}
             alt="tomato"
@@ -17,6 +19,8 @@ function App() {
           />
         </div>
       </div>
+
+      <Menu />
     </div>
   );
 }

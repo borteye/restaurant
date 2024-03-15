@@ -12,8 +12,8 @@ type Props = {};
 const Navbar = (props: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <nav className="px-5 average:px-0 w-screen average:w-full flex items-center justify-between">
-      <div className=" w-20 average:w-28">
+    <nav className="px-6 average:px-0 w-screen average:w-full flex items-center justify-between">
+      <div className=" w-20 average:w-28 ">
         <img src={logo} alt="logo" className="w-20 average:w-32" />
       </div>
       <Bars3BottomRightIcon
@@ -22,9 +22,9 @@ const Navbar = (props: Props) => {
       />
 
       <div
-        className={`bg-black average:bg-transparent average:text-light absolute average:relative  w-screen h-full ${
+        className={`bg-black average:bg-transparent  average:text-light absolute left-0 average:relative w-screen average:w-[80%]  h-full ${
           isOpen ? "flex" : "hidden average:flex"
-        }  flex-col gap-y-12 top-0 px-4 py-8 z-50`}
+        }  flex-col gap-y-12 top-0  py-8 z-50 px-6 average:px-0`}
       >
         <div className="average:hidden bg-black rounded-md w-fit p-2">
           <XMarkIcon
@@ -32,8 +32,8 @@ const Navbar = (props: Props) => {
             onClick={() => setIsOpen(false)}
           />
         </div>
-        <div className="average:flex average:justify-between ">
-          <ul className="average:flex justify-between average:w-[20%]">
+        <div className="average:flex justify-between">
+          <ul className="average:flex justify-between  average:w-[20%]">
             <li className="hover:bg-overlay py-2 px-4 average:px-0 rounded-md cursor-pointer">
               Home
             </li>
@@ -44,7 +44,7 @@ const Navbar = (props: Props) => {
               O nas
             </li>
           </ul>
-          <ul className="flex flex-col average:flex-row justify-between gap-8 average:w-[70%]">
+          <ul className="flex flex-col average:flex-row gap-8 average:w-fit">
             <li className="flex items-center gap-x-4">
               <ShoppingCartIcon className="w-5 h-5 text-primary" />
               <div>
