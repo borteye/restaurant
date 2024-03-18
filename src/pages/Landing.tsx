@@ -10,7 +10,7 @@ import { ArrowLongLeftIcon } from "@heroicons/react/24/solid";
 
 type Props = {};
 
-const LandingPage = (props: Props) => {
+const Landing = (props: Props) => {
   return (
     <section className="w-screen  max-w-[1440px] m-auto flex flex-col gap-y-36 items-center md:flex-row justify-between px-2 md:px-16">
       <div className="flex flex-col gap-y-8">
@@ -64,4 +64,4 @@ const LandingPage = (props: Props) => {
   );
 };
 
-export default LandingPage;
+export default Landing;

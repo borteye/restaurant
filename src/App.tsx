@@ -1,8 +1,9 @@
 import React from "react";
 import tomato from "./assets/tomato.png";
 import Navbar from "./components/Navbar";
-import LandingPage from "./pages/Landing";
+import Landing from "./pages/Landing";
 import Menu from "./pages/Menu";
+import Banner from "./components/Banner";
 
 function App() {
   return (
@@ -10,8 +11,7 @@ function App() {
       <div className=" h-full flex flex-col items-center justify-between gap-y-12  bg-overlay text-light px-16 py-6 relative">
         <Navbar />
         <div className="h-full flex flex-col items-center justify-center">
-          <LandingPage />
-
+          <Landing />
           <img
             src={tomato}
             alt="tomato"
@@ -19,8 +19,8 @@ function App() {
           />
         </div>
       </div>
-
       <Menu />
+      <Banner />
     </div>
   );
 }

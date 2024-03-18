@@ -7,7 +7,7 @@ type Props = {};
 
 const Menu = (props: Props) => {
   return (
-    <div className="w-full bg-black py-20  m-auto">
+    <div className="w-full bg-black py-20">
       <div className="relative max-w-[1440px] flex flex-col gap-y-12 mx-auto px-6 md:px-16">
         <h1 className="text-3xl font-bold text-light">MENU</h1>
         <div>
