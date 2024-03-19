@@ -10,6 +10,26 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+  .or:before {
+    content: "";
+    display: block;
+    width: 45%;
+    height: 2px;
+    background-color: #e4e4e4;
+    position: absolute;
+    left: 0;
+    top: 50%;
+  }
+  .or:after {
+    content: "";
+    display: block;
+    width: 45%;
+    height: 2px;
+    background-color: #e4e4e4;
+    position: absolute;
+    right: 0;
+    top: 50%;
+  }
 }
 
 * {

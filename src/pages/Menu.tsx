@@ -1,13 +1,15 @@
-import React from "react";
+import React, { FC } from "react";
 import MenuCard from "../components/MenuCard";
 import tomato from "../assets/tomato.png";
 import chili from "../assets/chili.png";
 
-type Props = {};
+type Props = {
+  menuRef: React.MutableRefObject<null>;
+};
 
-const Menu = (props: Props) => {
+const Menu: FC<Props> = ({ menuRef }) => {
   return (
-    <div className="w-full bg-black py-20">
+    <div className="w-full bg-black py-20" ref={menuRef}>
       <div className="relative max-w-[1440px] flex flex-col gap-y-12 mx-auto px-6 md:px-16">
         <h1 className="text-3xl font-bold text-light">MENU</h1>
         <div>
