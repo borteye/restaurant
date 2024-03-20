@@ -1,17 +1,14 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import tomato from "./assets/tomato.png";
-import Navbar from "./components/Navbar";
-import Landing from "./pages/Landing";
-import Menu from "./pages/Menu";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Banner from "./components/Banner";
+import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 
 function App() {
   return (
     <>
-      <BrowserRouter>
+      <Router>
         <Routes>
           <Route path="/" element={<Landing />} />
           {/* <Route path="/menu" element={<Menu />} /> */}
@@ -20,7 +17,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
         </Routes>
-      </BrowserRouter>
+      </Router>
     </>
   );
 }

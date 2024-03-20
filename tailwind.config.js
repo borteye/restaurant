@@ -30,7 +30,7 @@ module.exports = {
         clamp: "clamp(20rem, 20vw, 25rem)",
       },
       backgroundImage: {
-        heroImage: "url(/src/assets/texture-bg.png)",
+        texture: "url(/src/assets/texture-bg.png)",
         loginImage: "url(/src/assets/login.jpg)",
         signupImage: "url(/src/assets/signup.jpg)",
       },
@@ -40,6 +40,7 @@ module.exports = {
       },
       maxWidth: {
         max_lg: "1024px",
+        max_tomato: "7rem"
       },
     },
   },

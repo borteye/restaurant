@@ -1,12 +1,12 @@
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import {
-  PhoneIcon,
   Bars3BottomRightIcon,
+  PhoneIcon,
   XMarkIcon,
 } from "@heroicons/react/24/solid";
-import logo from "../assets/logo.png";
 import React, { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/logo.png";
 
 type Props = {
   homeRef: React.MutableRefObject<null>;
@@ -36,7 +36,7 @@ const Navbar: FC<Props> = ({ homeRef, menuRef }) => {
   };
 
   return (
-    <nav className=" bg-heroImage bg-cover bg-center  sticky top-0 bottom-0 z-50">
+    <nav className=" bg-texture bg-cover bg-center  sticky top-0 bottom-0 z-50">
       <div className="bg-overlay1 px-12 py-6 average:py-0 w-screen average:w-full flex items-center justify-between">
         <div className=" w-20 average:w-28 ">
           <img src={logo} alt="logo" className="w-20 average:w-32" />

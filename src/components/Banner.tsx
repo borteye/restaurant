@@ -1,14 +1,13 @@
-import React from "react";
+import greenchili from "../assets/greenchili.png";
 import pan from "../assets/pan.png";
 import pig from "../assets/pig.svg";
-import greenchili from "../assets/greenchili.png";
 
 type Props = {};
 
 const Banner = (props: Props) => {
   return (
     <div className="w-full  md:h-[70vh]  flex items-center py-16 bg-black ">
-      <div className="w-full bg-heroImage bg-cover bg-center ">
+      <div className="w-full bg-texture bg-cover bg-center ">
         <div className="bg-bannerOverlay  ">
           <div className="text-light relative  max-w-[1440px]  mx-auto flex flex-col-reverse gap-y-8 md:flex-row items-center justify-between px-6 md:px-16 py-8  ">
             <div className="text-center flex flex-col gap-y-12  lg:w-[60%] w-full md:text-left">
