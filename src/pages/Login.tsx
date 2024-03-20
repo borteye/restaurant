@@ -5,6 +5,7 @@ import github from "../assets/github.svg";
 import google from "../assets/google.svg";
 import food from "../assets/login.jpg";
 import logo from "../assets/logo.png";
+import InputField from "../components/InputField";
 
 type Props = {};
 
@@ -14,12 +15,13 @@ const Login = (props: Props) => {
   const navigate = useNavigate();
 
   const handleShowPassword = () => {
-    setShowPassword(true);
+    setShowPassword(() => !showPassword);
+
   };
 
-  const handleHidePassword = () => {
-    setShowPassword(false);
-  };
+  console.log(showPassword)
+
+ 
 
   const signUp = () => {
     navigate("/sign-up");
@@ -33,7 +35,7 @@ const Login = (props: Props) => {
             <div className="flex flex-col gap-y-4 max-w-max_lg lg:mx-auto">
               <img src={logo} alt="logo" className="w-28 lg:w-36 " />
               <h1 className="text-clamp font-bold">Welcome Back</h1>
-              <p className="text-tertia">
+              <p className="text-tertia" onClick={handleShowPassword}>
                 Sign in with your email address and password.
               </p>
               <form className="flex flex-col gap-y-10">
@@ -41,30 +43,14 @@ const Login = (props: Props) => {
                   <label className="text-sm text-secondary">
                     Email Address
                   </label>
-                  <input
-                    type="text"
-                    className="bg-tertiary outline-none px-4 py-1"
-                  />
+                  <InputField type={"email"}/>
                 </div>
                 <div className="flex flex-col gap-y-2">
                   <label className="text-sm text-secondary">Password</label>
-                  <div className="bg-tertiary flex px-4 py-1">
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      className="bg-transparent w-full outline-none  "
-                    />
-                    {showPassword ? (
-                      <EyeIcon
-                        onClick={handleHidePassword}
-                        className="w-7 text-black cursor-pointer"
-                      />
-                    ) : (
-                      <EyeSlashIcon
-                        onClick={handleShowPassword}
-                        className="w-7 text-black cursor-pointer"
-                      />
-                    )}
+                  <div className="bg-tertiary  px-4 py-1 flex " >
+                  <InputField handleShowPassword={handleShowPassword} showPassword={showPassword}   />
                   </div>
+               
                 </div>
                 <div className="flex items-center justify-between">
                 <div className="flex gap-x-2">

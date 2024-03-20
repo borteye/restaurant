@@ -13,7 +13,6 @@ const Menu: FC<Props> = ({ menuRef }) => {
   function handleCategory(category: string) {
     setSelectCategory(category);
   }
-  console.log(selectCategory);
 
   const filteredData = dummyData?.filter(
     (doc) => doc?.category === selectCategory
