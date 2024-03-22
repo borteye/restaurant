@@ -19,17 +19,16 @@ module.exports = {
         count: "#3c3c44",
         cartGradientStart: "#a9be5e",
         cartGradientEnd: "#6d7c3c",
-        error: "#FF0000"
+        error: "#FF0000",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
       },
       fontSize: {
         clamp: "clamp(1.8rem, 6vw, 6rem)",
+        authClamp: "clamp(1.75rem, 5.5vw, 5.5rem)",
       },
-      width: {
-        clamp: "clamp(15rem, 15vw, 18rem)",
-      },
+
       backgroundImage: {
         texture: "url(/src/assets/texture-bg.png)",
         loginImage: "url(/src/assets/login.jpg)",
@@ -41,7 +40,7 @@ module.exports = {
       },
       maxWidth: {
         max_lg: "1024px",
-        max_tomato: "7rem"
+        max_tomato: "7rem",
       },
     },
   },

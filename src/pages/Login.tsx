@@ -1,4 +1,3 @@
-import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import github from "../assets/github.svg";
@@ -6,7 +5,11 @@ import google from "../assets/google.svg";
 import food from "../assets/login.jpg";
 import logo from "../assets/logo.png";
 import InputField from "../components/InputField";
-import { useFormikHook } from "../hooks/useFormik";
+import { useFormik } from "formik";
+
+import { fetchData } from "../hooks/fetch";
+
+import { authSchema } from "../AuthenticationSchema";
 
 type Props = {};
 
@@ -23,9 +26,40 @@ const Login = (props: Props) => {
     navigate("/sign-up");
   };
 
+  //  const url = "";
+  // const method = "";
+
+  // const fetchData = (values:MyFormValues) => {
+  //   const url = 'https://dummyjson.com/auth/login';
+  //   const method = 'POST'; // or any other method you want
+  //   return useFetch({ url, method, body: values });
+  // };
+
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      password: "",
+    },
+
+    validationSchema: authSchema,
+
+    onSubmit: async (values) => {
+      try {
+        const url = "https://dummyjson.com/auth/login";
+        const method = "POST";
+        fetchData({ url, method, body: values });
+
+        // await useFetch({ url, method, body: values });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  });
+
+  console.log(formik.errors)
+
   const { values, touched, handleBlur, handleChange, handleSubmit, errors } =
-    useFormikHook();
-  console.log(errors, touched);
+    formik;
 
   return (
     <>
@@ -34,31 +68,29 @@ const Login = (props: Props) => {
           <div className="bg-[#0000007e] h-screen overflow-y-scroll no-scrollbar px-6 md:px-16 py-8 ">
             <div className="flex flex-col gap-y-4 max-w-max_lg lg:mx-auto">
               <img src={logo} alt="logo" className="w-28 lg:w-36 " />
-              <h1 className="text-clamp font-bold leading-none">
+              <h1 className="text-authClamp font-bold leading-none">
                 Welcome Back
               </h1>
               <p className="text-tertia">
-                Sign in with your email address and password.
+                Sign in with your username and password.
               </p>
               <form onSubmit={handleSubmit} className="flex flex-col gap-y-10">
                 <div className="flex flex-col gap-y-2">
                   <label className="text-sm text-secondary">
-                    Email Address
+                    Username
                   </label>
                   <div className=" ">
                     <InputField
-                      type={"email"}
-                      value={values.email}
-                      name={"email"}
+                      type={"text"}
+                      value={values.username}
+                      name={"username"}
                       handleChange={handleChange}
-                      emailError={errors.email}
-                      touchedEmail={touched.email}
+                      usernameError={errors.username}
+                      touchedUsername={touched.username}
                       handleBlur={handleBlur}
                     />
-                    {errors.email && touched.email ? (
-                      <div className="text-error mt-[-1.5rem]">
-                        {errors.email}
-                      </div>
+                    {errors.username && touched.username ? (
+                      <div className="text-error">{errors.username}</div>
                     ) : (
                       false
                     )}
@@ -67,8 +99,8 @@ const Login = (props: Props) => {
                 <div className="flex flex-col gap-y-2">
                   <label className="text-sm text-secondary">Password</label>
                   <div
-                    className={`bg-tertiary flex rounded-md ${
-                      errors.password && touched.password ? "input-error" : ""
+                    className={`bg-tertiary flex items-center rounded-md ${
+                      errors.password && touched.password ? "input-error " : ""
                     } `}
                   >
                     <InputField
@@ -77,11 +109,14 @@ const Login = (props: Props) => {
                       value={values.password}
                       name={"password"}
                       handleChange={handleChange}
+                      password={true}
                       handleBlur={handleBlur}
                     />
                   </div>
                   {errors.password && touched.password ? (
-                    <div className="text-error ">{errors.password}</div>
+                    <div className="text-error mt-[-0.5rem] ">
+                      {errors.password}
+                    </div>
                   ) : (
                     false
                   )}

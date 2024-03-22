@@ -6,13 +6,14 @@ const passwordValidRegex: RegExp =
 const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const authSchema = yup.object().shape({
-  email: yup
+  username: yup
     .string()
-    .matches(emailRegex, { message: "Enter a valid email" })
+    .max(20, "too long")
+    // .matches(emailRegex, { message: "Enter a valid email" })
     .required("Requried"),
   password: yup
     .string()
-    .min(8)
-    .matches(passwordValidRegex, { message: "Please create a strong password" })
+    .min(2)
+    // .matches(passwordValidRegex, { message: "Please create a strong password" })
     .required("Required"),
 });

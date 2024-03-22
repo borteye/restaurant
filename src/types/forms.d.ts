@@ -5,15 +5,24 @@ type TextFieldProps = {
   type?: string;
   value?: string;
   name?: string;
-  emailError?: string;
-  passwordError?: string;
-  touchedEmail?: boolean;
+  usernameError?: string;
+  touchedUsername?: boolean;
+  password?: boolean;
   handleBlur?: FocusEventHandler<HTMLInputElement> | undefined;
 };
 
 interface MyFormValues {
-  email: string;
+  username: string;
   password: string;
 }
 
-export { TextFieldProps, MyFormValues };
+export interface FetchProps {
+  url: string;
+  method: string;
+  body: {
+    password?: string;
+    username?: string;
+  };
+}
+
+export { TextFieldProps, MyFormValues, FetchProps };
