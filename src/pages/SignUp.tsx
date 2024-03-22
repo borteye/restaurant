@@ -5,6 +5,8 @@ import github from "../assets/github.svg";
 import google from "../assets/google.svg";
 import logo from "../assets/logo.png";
 import foodImg from "../assets/signup.jpg";
+import InputField from "../components/InputField";
+import { useFormikHook } from "../hooks/useFormik";
 
 type Props = {};
 
@@ -13,17 +15,16 @@ const SignUp = (props: Props) => {
 
   const navigate = useNavigate();
 
-  const handleShowPassword = () => {
+  const togglePasswordVisibility = () => {
     setShowPassword(true);
-  };
-
-  const handleHidePassword = () => {
-    setShowPassword(false);
   };
 
   const login = () => {
     navigate("/login");
   };
+
+  const { values, touched, handleBlur, handleChange, handleSubmit, errors } =
+    useFormikHook();
 
   return (
     <>
@@ -41,30 +42,46 @@ const SignUp = (props: Props) => {
                   <label className="text-sm text-secondary">
                     Email Address
                   </label>
-                  <input
-                    type="text"
-                    className="bg-tertiary outline-none px-4 py-1"
-                  />
+                  <div className=" ">
+                    <InputField
+                      type={"email"}
+                      value={values.email}
+                      name={"email"}
+                      handleChange={handleChange}
+                      emailError={errors.email}
+                      touchedEmail={touched.email}
+                      handleBlur={handleBlur}
+                    />
+                    {errors.email && touched.email ? (
+                      <div className="text-error mt-[-1.5rem]">
+                        {errors.email}
+                      </div>
+                    ) : (
+                      false
+                    )}
+                  </div>
                 </div>
                 <div className="flex flex-col gap-y-2">
                   <label className="text-sm text-secondary">Password</label>
-                  <div className="bg-tertiary flex px-4 py-1">
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      className="bg-transparent w-full outline-none  "
+                  <div
+                    className={`bg-tertiary flex rounded-md ${
+                      errors.password && touched.password ? "input-error" : ""
+                    } `}
+                  >
+                    <InputField
+                      togglePasswordVisibility={togglePasswordVisibility}
+                      showPassword={showPassword}
+                      value={values.password}
+                      name={"password"}
+                      handleChange={handleChange}
+                      handleBlur={handleBlur}
                     />
-                    {showPassword ? (
-                      <EyeIcon
-                        onClick={handleHidePassword}
-                        className="w-7 text-black cursor-pointer"
-                      />
-                    ) : (
-                      <EyeSlashIcon
-                        onClick={handleShowPassword}
-                        className="w-7 text-black cursor-pointer"
-                      />
-                    )}
                   </div>
+                  {errors.password && touched.password ? (
+                    <div className="text-error ">{errors.password}</div>
+                  ) : (
+                    false
+                  )}
                 </div>
                 <div>
                   <button className="bg-black text- font-semibold px-12 py-3 w-full md:w-fit">

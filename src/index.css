@@ -30,6 +30,9 @@
     right: 0;
     top: 50%;
   }
+  .input-error {
+    border: 2px solid red;
+  }
 }
 
 * {

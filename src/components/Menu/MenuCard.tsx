@@ -1,7 +1,7 @@
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import burger from "../../assets/burger.png";
 import { FC } from "react";
-import { FoodDetails } from "../../typings";
+import { FoodDetails } from "../../types/Dishes/typings";
 
 type Props = {
   dummyData: FoodDetails[];

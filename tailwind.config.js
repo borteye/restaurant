@@ -19,6 +19,7 @@ module.exports = {
         count: "#3c3c44",
         cartGradientStart: "#a9be5e",
         cartGradientEnd: "#6d7c3c",
+        error: "#FF0000"
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
@@ -27,7 +28,7 @@ module.exports = {
         clamp: "clamp(1.8rem, 6vw, 6rem)",
       },
       width: {
-        clamp: "clamp(20rem, 20vw, 25rem)",
+        clamp: "clamp(15rem, 15vw, 18rem)",
       },
       backgroundImage: {
         texture: "url(/src/assets/texture-bg.png)",
