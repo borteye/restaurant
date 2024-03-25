@@ -45,9 +45,9 @@ const Login = (props: Props) => {
 
     onSubmit: async (values) => {
       try {
-        const url = "https://dummyjson.com/auth/login";
-        const method = "POST";
-        fetchData({ url, method, body: values });
+        const url = `http://localhost:5000/auth/login`;
+        const method = "GET";
+        fetchData({ url, method });
 
         // await useFetch({ url, method, body: values });
       } catch (error) {
@@ -56,7 +56,7 @@ const Login = (props: Props) => {
     },
   });
 
-  console.log(formik.errors)
+  console.log(formik.errors);
 
   const { values, touched, handleBlur, handleChange, handleSubmit, errors } =
     formik;
@@ -76,9 +76,7 @@ const Login = (props: Props) => {
               </p>
               <form onSubmit={handleSubmit} className="flex flex-col gap-y-10">
                 <div className="flex flex-col gap-y-2">
-                  <label className="text-sm text-secondary">
-                    Username
-                  </label>
+                  <label className="text-sm text-secondary">Username</label>
                   <div className=" ">
                     <InputField
                       type={"text"}

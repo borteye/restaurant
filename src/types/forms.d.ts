@@ -19,7 +19,7 @@ interface MyFormValues {
 export interface FetchProps {
   url: string;
   method: string;
-  body: {
+  body?: {
     password?: string;
     username?: string;
   };
