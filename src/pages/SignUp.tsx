@@ -6,8 +6,10 @@ import logo from "../assets/logo.png";
 import foodImg from "../assets/signup.jpg";
 import InputField from "../components/InputField";
 import { useFormik } from "formik";
-import { authSchema } from "../AuthenticationSchema";
-import { MyFormValues } from "../types/forms";
+import { authSignupSchema } from "../AuthenticationSchema";
+import { SignUpValues } from "../types/forms";
+import { fetchData } from "../hooks/fetch";
+import { signupResponse } from "../types/response";
 
 type Props = {};
 
@@ -26,18 +28,37 @@ const SignUp = (props: Props) => {
   const formik = useFormik({
     initialValues: {
       username: "",
+      email: "",
       password: "",
+      confirmPassword: "",
     },
 
-    validationSchema: authSchema,
+    validationSchema: authSignupSchema,
 
-    onSubmit: (values: MyFormValues) => {
-      console.log(values);
+    onSubmit: async (values: SignUpValues) => {
+      try {
+        const url: string = "http://localhost:5000/auth/signup";
+        const method = "POST";
+        const body = values;
+
+        const { success, error }: signupResponse = await fetchData({
+          url,
+          method,
+          body,
+        });
+
+        if (success) {
+          console.log(success);
+          navigate("/login");
+        } else if (error) {
+          console.log(error);
+          navigate("/signup");
+        }
+      } catch (error) {
+        console.error(error);
+      }
     },
   });
-
-  const url = "https://dummyjson.com/auth/login";
-  const method = "POST";
 
   const { values, touched, handleBlur, handleChange, handleSubmit, errors } =
     formik;
@@ -53,16 +74,14 @@ const SignUp = (props: Props) => {
               <p className="text-tertia">
                 Sign in with your email address and password.
               </p>
-              <form className="flex flex-col gap-y-10">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-y-10">
                 <div className="flex flex-col gap-y-2">
-                  <label className="text-sm text-secondary">
-                    Email Address
-                  </label>
+                  <label className="text-sm text-secondary">Username</label>
                   <div className=" ">
                     <InputField
-                      type={"email"}
+                      type={"text"}
                       value={values.username}
-                      name={"email"}
+                      name={"username"}
                       handleChange={handleChange}
                       usernameError={errors.username}
                       touchedUsername={touched.username}
@@ -70,6 +89,27 @@ const SignUp = (props: Props) => {
                     />
                     {errors.username && touched.username ? (
                       <div className="text-error">{errors.username}</div>
+                    ) : (
+                      false
+                    )}
+                  </div>
+                </div>
+                <div className="flex flex-col gap-y-2">
+                  <label className="text-sm text-secondary">
+                    Email Address
+                  </label>
+                  <div className=" ">
+                    <InputField
+                      type={"email"}
+                      value={values.email}
+                      name={"email"}
+                      handleChange={handleChange}
+                      emailError={errors.email}
+                      touchedEmail={touched.email}
+                      handleBlur={handleBlur}
+                    />
+                    {errors.email && touched.email ? (
+                      <div className="text-error">{errors.email}</div>
                     ) : (
                       false
                     )}
@@ -87,6 +127,7 @@ const SignUp = (props: Props) => {
                       showPassword={showPassword}
                       value={values.password}
                       name={"password"}
+                      password={true}
                       handleChange={handleChange}
                       handleBlur={handleBlur}
                     />
@@ -99,8 +140,40 @@ const SignUp = (props: Props) => {
                     false
                   )}
                 </div>
+                <div className="flex flex-col gap-y-2">
+                  <label className="text-sm text-secondary">
+                    Confirm Password
+                  </label>
+                  <div
+                    className={`bg-tertiary flex items-center rounded-md ${
+                      errors.confirmPassword && touched.confirmPassword
+                        ? "input-error"
+                        : ""
+                    } `}
+                  >
+                    <InputField
+                      togglePasswordVisibility={togglePasswordVisibility}
+                      showPassword={showPassword}
+                      value={values.confirmPassword}
+                      name={"confirmPassword"}
+                      password={true}
+                      handleChange={handleChange}
+                      handleBlur={handleBlur}
+                    />
+                  </div>
+                  {errors.confirmPassword && touched.confirmPassword ? (
+                    <div className="text-error mt-[-0.5rem] ">
+                      {errors.confirmPassword}
+                    </div>
+                  ) : (
+                    false
+                  )}
+                </div>
                 <div>
-                  <button className="bg-black text- font-semibold px-12 py-3 w-full md:w-fit">
+                  <button
+                    type="submit"
+                    className="bg-black text- font-semibold px-12 py-3 w-full md:w-fit"
+                  >
                     Sign Up
                   </button>
                 </div>

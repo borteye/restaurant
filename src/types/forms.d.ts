@@ -6,23 +6,33 @@ type TextFieldProps = {
   value?: string;
   name?: string;
   usernameError?: string;
+  emailError?: string;
   touchedUsername?: boolean;
+  touchedEmail?: boolean;
   password?: boolean;
   handleBlur?: FocusEventHandler<HTMLInputElement> | undefined;
 };
 
-interface MyFormValues {
+interface LoginValues {
   username: string;
   password: string;
+  staySignedIn?: boolean;
+}
+
+interface SignUpValues {
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
 }
 
 export interface FetchProps {
   url: string;
   method: string;
   body?: {
-    password?: string;
-    username?: string;
+    password: string;
+    username: string;
   };
 }
 
-export { TextFieldProps, MyFormValues, FetchProps };
+export { TextFieldProps, LoginValues, SignUpValues, FetchProps };

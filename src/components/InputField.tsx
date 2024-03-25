@@ -11,7 +11,9 @@ const InputField: FC<TextFieldProps> = ({
   name,
   password,
   usernameError,
+  emailError,
   touchedUsername,
+  touchedEmail,
   handleBlur,
 }) => {
   return (
@@ -21,7 +23,11 @@ const InputField: FC<TextFieldProps> = ({
           type={type}
           className={`w-full outline-none text-black rounded-md ${
             type !== "password" && "bg-tertiary px-4 py-1"
-          } ${usernameError && touchedUsername ? "input-error" : ""}  `}
+          } ${
+            (usernameError && touchedUsername) || (emailError && touchedEmail)
+              ? "input-error"
+              : ""
+          }  `}
           value={value}
           name={name}
           onChange={handleChange}

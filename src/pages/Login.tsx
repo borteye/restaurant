@@ -1,21 +1,23 @@
+import { useFormik } from "formik";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { authLoginSchema } from "../AuthenticationSchema";
 import github from "../assets/github.svg";
 import google from "../assets/google.svg";
 import food from "../assets/login.jpg";
 import logo from "../assets/logo.png";
 import InputField from "../components/InputField";
-import { useFormik } from "formik";
-
 import { fetchData } from "../hooks/fetch";
+import { ActiveGate } from "../redux/features/userSlice";
+import { roles } from "../roles";
+import { LoginValues } from "../types/forms";
+import { loginResponse } from "../types/response";
 
-import { authSchema } from "../AuthenticationSchema";
-
-type Props = {};
-
-const Login = (props: Props) => {
+const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
+  const disptach = useDispatch();
   const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
@@ -23,33 +25,46 @@ const Login = (props: Props) => {
   };
 
   const signUp = () => {
-    navigate("/sign-up");
+    navigate("/signup");
   };
-
-  //  const url = "";
-  // const method = "";
-
-  // const fetchData = (values:MyFormValues) => {
-  //   const url = 'https://dummyjson.com/auth/login';
-  //   const method = 'POST'; // or any other method you want
-  //   return useFetch({ url, method, body: values });
-  // };
 
   const formik = useFormik({
     initialValues: {
       username: "",
       password: "",
+      staySignedIn: false,
     },
+    validationSchema: authLoginSchema,
 
-    validationSchema: authSchema,
-
-    onSubmit: async (values) => {
+    onSubmit: async (values: LoginValues) => {
       try {
-        const url = `http://localhost:5000/auth/login`;
-        const method = "GET";
-        fetchData({ url, method });
+        const url: string = "http://localhost:5000/auth/login";
+        const method: string = "POST";
+        const body = values;
 
-        // await useFetch({ url, method, body: values });
+        const { result, success, error }: loginResponse = await fetchData({
+          url,
+          method,
+          body,
+        });
+
+        if (success) {
+          disptach(
+            ActiveGate({
+              id: result.id,
+              email: result.email,
+              username: result.username,
+              role: result.role,
+              staySignedIn: values.staySignedIn,
+            })
+          );
+          result.role === roles.admin
+            ? navigate("/admin")
+            : navigate("/customer");
+        } else if (error) {
+          console.error(error);
+          navigate("/login");
+        }
       } catch (error) {
         console.error(error);
       }
@@ -121,7 +136,13 @@ const Login = (props: Props) => {
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex gap-x-2">
-                    <input type="checkbox" /> <p>Remember me</p>
+                    <input
+                      type="checkbox"
+                      name="staySignedIn"
+                      checked={values.staySignedIn}
+                      onChange={handleChange}
+                    />{" "}
+                    <p>Remember me</p>
                   </div>
                   <p className="text-secondary">Forgot Password?</p>
                 </div>
