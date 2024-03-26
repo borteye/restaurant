@@ -1,6 +1,6 @@
 interface loginResponse {
   result: {
-    id: string;
+    id: number;
     email: string;
     username: string;
     role: string;

@@ -48,7 +48,10 @@ const Login = () => {
           body,
         });
 
+        console.log(result, success, error);
+
         if (success) {
+          navigate("/admin");
           disptach(
             ActiveGate({
               id: result.id,
@@ -60,7 +63,9 @@ const Login = () => {
           );
           result.role === roles.admin
             ? navigate("/admin")
-            : navigate("/customer");
+            : result.role === roles.customer
+            ? navigate("/customer")
+            : navigate("/signup");
         } else if (error) {
           console.error(error);
           navigate("/login");

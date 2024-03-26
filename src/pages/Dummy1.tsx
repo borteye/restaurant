@@ -1,9 +1,14 @@
 import React from "react";
+import SideNav from "../components/SideNav";
 
 type Props = {};
 
 const Dummy1 = (props: Props) => {
-  return <div>Customer</div>;
+  return (
+    <>
+      <SideNav />
+    </>
+  );
 };
 
 export default Dummy1;
