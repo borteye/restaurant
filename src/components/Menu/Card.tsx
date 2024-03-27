@@ -7,8 +7,7 @@ type Props = {
   dummyData: FoodDetails[];
 };
 
-const MenuCard: FC<Props> = ({ dummyData }) => {
-  
+const Card: FC<Props> = ({ dummyData }) => {
   return (
     <>
       {dummyData?.map((dish, i) => {
@@ -26,7 +25,7 @@ const MenuCard: FC<Props> = ({ dummyData }) => {
               <div>
                 <h1 className="font-bold">{dish?.name}</h1>
                 <p className="text-sm w-full text-secondary  text-ellipsis leading-none">
-             {dish?.description}
+                  {dish?.description}
                 </p>
               </div>
               <div className="w-full flex items-center text-sm gap-x-4">
@@ -47,4 +46,4 @@ const MenuCard: FC<Props> = ({ dummyData }) => {
   );
 };
 
-export default MenuCard;
+export default Card;

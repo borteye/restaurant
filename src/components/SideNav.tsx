@@ -1,34 +1,113 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../assets/logo.png";
-import { Squares2X2Icon } from "@heroicons/react/24/solid";
+import {
+  Squares2X2Icon,
+  HomeIcon,
+  ClockIcon,
+  Cog8ToothIcon,
+  AdjustmentsVerticalIcon,
+  ClipboardDocumentListIcon,
+  ClipboardIcon,
+  UsersIcon,
+  GiftIcon,
+} from "@heroicons/react/24/solid";
 import { selectRole } from "../redux/features/userSlice";
 import { UseSelector, useSelector } from "react-redux";
 import { roles } from "../roles";
+import path from "path";
+import { useNavigate } from "react-router-dom";
 
 type Props = {};
 
 const SideNav = (props: Props) => {
   const role = useSelector(selectRole);
 
-  const adminRoute: string[] = [
-    "Home",
-    "Menu",
-    "History",
-    "Promos",
-    "Settings",
-    "Logout",
+  const navigate = useNavigate();
+  const { pathname } = window.location;
+
+  const navigator = (location: string) => {
+    navigate(location);
+  };
+
+  const adminRoute = [
+    {
+      icon: <HomeIcon className="w-5 sm:w-7" />,
+      name: "Home",
+      pathname: "/home",
+    },
+    {
+      icon: <UsersIcon className="w-5 sm:w-7" />,
+      name: "Users",
+      pathname: "/admin",
+    },
+    {
+      icon: <ClipboardDocumentListIcon className="w-5 sm:w-7" />,
+      name: "Orders",
+      pathname: "/admin",
+    },
+    {
+      icon: <ClipboardDocumentListIcon className="w-5 sm:w-7" />,
+      name: "Orders",
+      pathname: "/admin",
+    },
+    {
+      icon: <ClockIcon className="w-5 sm:w-7" />,
+      name: "History",
+      pathname: "/admin",
+    },
+    {
+      icon: <GiftIcon className="w-5 sm:w-7" />,
+      name: "Promos",
+      pathname: "/admin",
+    },
+    {
+      icon: <AdjustmentsVerticalIcon className="w-5 sm:w-7" />,
+      name: "Settings",
+      pathname: "/admin",
+    },
   ];
 
-  const customerRoute: string[] = ["Home", "Menu", "History", "Logout"];
+  const customerRoute = [
+    {
+      icon: <HomeIcon className="w-5 sm:w-7" />,
+      name: "Home",
+      pathname: "/home",
+    },
+    {
+      icon: <ClipboardDocumentListIcon className="w-5 sm:w-7" />,
+      name: "Orders",
+      pathname: "/admin",
+    },
+    {
+      icon: <ClockIcon className="w-5 sm:w-7" />,
+      name: "History",
+      pathname: "/admin",
+    },
+    {
+      icon: <GiftIcon className="w-5 sm:w-7" />,
+      name: "Promos",
+      pathname: "/admin",
+    },
+  ];
 
   const Privilegdes =
     role && role === roles.admin ? (
       <>
         {adminRoute.map((navs, i) => {
           return (
-            <li className="text-light font-semibold flex flex-col items-center justify-center bg-primary p-2 rounded-lg ">
-              <p>{navs}</p>
-              <Squares2X2Icon className="w-7" />
+            <li
+              className={`text-sm ${
+                navs.pathname === pathname
+                  ? "bg-primary text-light rounded-xl"
+                  : "bg-count text-secondary"
+              }    transition-all duration-300 group ease-linear cursor-pointer    hover:text-light font-semibold flex flex-col items-center justify-center p-2 rounded-3xl hover:rounded-xl  relative`}
+              key={i}
+              onClick={() => navigator(navs.pathname)}
+            >
+              {navs.icon}
+              <p className="absolute  w-auto left-14 shadow-md rounded-lg bg-count font-bold group-hover:scale-100 text-center transition-all duration-100 py-1 px-2 scale-0  origin-left">
+                {navs.name}
+              </p>
             </li>
           );
         })}
@@ -37,9 +116,19 @@ const SideNav = (props: Props) => {
       <>
         {customerRoute.map((navs, i) => {
           return (
-            <li className="text-light font-semibold flex flex-col items-center justify-center bg-primary p-2 rounded-lg ">
-              <p>{navs}</p>
-              <Squares2X2Icon className="w-7" />
+            <li
+              className={`text-sm ${
+                navs.pathname === pathname
+                  ? "bg-primary text-light rounded-xl"
+                  : "bg-count text-secondary"
+              }    transition-all duration-300 group ease-linear cursor-pointer    hover:text-light font-semibold flex flex-col items-center justify-center p-2 rounded-3xl hover:rounded-xl  relative`}
+              key={i}
+              onClick={() => navigator(navs.pathname)}
+            >
+              {navs.icon}
+              <p className="absolute  w-auto left-14 shadow-md rounded-lg bg-count font-bold group-hover:scale-100 text-center transition-all duration-100 py-1 px-2 scale-0  origin-left">
+                {navs.name}
+              </p>
             </li>
           );
         })}
@@ -48,7 +137,7 @@ const SideNav = (props: Props) => {
       false
     );
   return (
-    <div className="bg-secondary w-[8rem] flex h-screen items-center justify-center ">
+    <div className="bg-secondary px-2 flex h-screen items-center justify-center ">
       <ul className="flex flex-col gap-y-8">{Privilegdes}</ul>
     </div>
   );

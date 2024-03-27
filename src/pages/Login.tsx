@@ -51,7 +51,6 @@ const Login = () => {
         console.log(result, success, error);
 
         if (success) {
-          navigate("/admin");
           disptach(
             ActiveGate({
               id: result.id,
@@ -61,14 +60,10 @@ const Login = () => {
               staySignedIn: values.staySignedIn,
             })
           );
-          result.role === roles.admin
-            ? navigate("/admin")
-            : result.role === roles.customer
-            ? navigate("/customer")
-            : navigate("/signup");
+          navigate("/home");
         } else if (error) {
           console.error(error);
-          navigate("/login");
+          navigate("/signup");
         }
       } catch (error) {
         console.error(error);

@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import tomato from "../../assets/tomato.png";
-import MenuCard from "./MenuCard";
+import Card from "./Card";
 import { dummyData } from "../../dummyData";
 
 type Props = {
@@ -42,7 +42,7 @@ const Menu: FC<Props> = ({ menuRef }) => {
           </ul>
         </div>
         <div className="grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 lg:grid-cols-4  gap-4 lg:gap-8 ">
-          <MenuCard dummyData={filteredData} />
+          <Card dummyData={filteredData} />
         </div>
         <div className=" mt-8 flex justify-center items-center">
           <button className="border-2 border-secondary text-secondary font-semibold py-2 px-4 w-fit rounded-full">

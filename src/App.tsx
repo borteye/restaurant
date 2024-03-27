@@ -5,12 +5,17 @@ import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import AdminRoutes from "./rotuer/AdminRoutes";
-import Dummy from "./pages/Dummy";
-import Dummy1 from "./pages/Dummy1";
+import Home from "./pages/Home";
 import CustomerRoutes from "./rotuer/CustomerRoutes";
 import Page404 from "./pages/Page404";
+import SideNav from "./components/SideNav";
+import ProtectedRoutes from "./rotuer/ProtectedRoutes";
+import { useSelector } from "react-redux";
+import { selectRole } from "./redux/features/userSlice";
+import { roles } from "./roles";
 
 function App() {
+  const role = useSelector(selectRole);
   return (
     <>
       <Router>
@@ -19,15 +24,22 @@ function App() {
           <Route path="/banner" element={<Banner />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route element={<Dummy />} path="/admin" />
-          <Route element={<AdminRoutes />}>
-            <Route element={<Dummy />} path="/admin" />
-          </Route>
-          <Route element={<Dummy1 />} path="/customer" />
-          <Route element={<CustomerRoutes />}>
-            <Route element={<Dummy1 />} path="/customer" />
-          </Route>
           <Route path="*" element={<Page404 />} />
+          {role && role === roles.admin ? (
+            <Route element={<AdminRoutes />}>
+              <Route element={<ProtectedRoutes />}>
+                <Route path="/home" element={<Home />} />
+              </Route>
+            </Route>
+          ) : role && role === roles.customer ? (
+            <Route element={<CustomerRoutes />}>
+              <Route element={<ProtectedRoutes />}>
+                <Route path="/home" element={<Home />} />
+              </Route>
+            </Route>
+          ) : (
+            false
+          )}
         </Routes>
       </Router>
     </>
