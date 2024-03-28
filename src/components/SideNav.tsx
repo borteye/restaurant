@@ -105,7 +105,7 @@ const SideNav = (props: Props) => {
               onClick={() => navigator(navs.pathname)}
             >
               {navs.icon}
-              <p className="absolute  w-auto left-14 shadow-md rounded-lg bg-count font-bold group-hover:scale-100 text-center transition-all duration-100 py-1 px-2 scale-0  origin-left">
+              <p className="absolute  w-auto left-14 shadow-md z-[1000px] rounded-lg bg-count font-bold group-hover:scale-100 text-center transition-all duration-100 py-1 px-2 scale-0  origin-left">
                 {navs.name}
               </p>
             </li>
@@ -137,8 +137,10 @@ const SideNav = (props: Props) => {
       false
     );
   return (
-    <div className="bg-secondary px-2 flex h-screen items-center justify-center ">
-      <ul className="flex flex-col gap-y-8">{Privilegdes}</ul>
+    <div className="bg-secondary px-2 justify-center items-center border h-full fixed left-0   ">
+      <ul className="flex flex-col gap-y-8 border border-yellow-700 ">
+        {Privilegdes}
+      </ul>
     </div>
   );
 };

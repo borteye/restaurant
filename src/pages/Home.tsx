@@ -13,7 +13,7 @@ type Props = {};
 
 const Home = (props: Props) => {
   return (
-    <div className="w-[calc(100%-62px)] p-6 ">
+    <div className="w-[calc(100%-62px)] p-6 border border-red-500 ">
       <nav className="flex items-center justify-between ">
         <div>
           <h1 className="text-2xl font-bold">Pakecho Restaurant</h1>
@@ -30,12 +30,11 @@ const Home = (props: Props) => {
           </div>
         </div>
       </nav>
-      <div className="flex flex-col justify-between h-[calc(100%-(62px+1.5rem))]">
-      <Categories />
-      <PopularDishes />
-      <Order />
+      <div className="flex flex-col gap-y-14 ">
+        <Categories />
+        <PopularDishes />
+        <Order />
       </div>
-     
     </div>
   );
 };

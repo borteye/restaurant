@@ -9,7 +9,7 @@ type Props = {
 const Order = ({ path = "/home" }) => {
   const { pathname } = window.location;
   return (
-    <section className="">
+    <section className="border border-red-500">
       {path === pathname ? (
         <div className="flex font-bold items-center justify-between ">
           <h1 className=" text-lg">Categorires</h1>

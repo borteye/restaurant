@@ -6,7 +6,7 @@ type Props = {};
 
 const ProtectedRoutes = () => {
   return (
-    <div className="flex h-full">
+    <div className="flex h-full justify-end">
       <SideNav />
       <Outlet />
     </div>
