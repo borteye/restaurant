@@ -9,7 +9,7 @@ const Card = (props: Props) => {
         <div className="flex justify-center">
           <img src={burger} alt="burger" className="w-24 " />
         </div>
-        <div className="bg-black text-light p-2 flex flex-col rounded-xl -mt-12 ">
+        <div className="bg-[#313131] text-light p-2 flex flex-col rounded-xl -mt-12 ">
           <div className="mt-16 flex flex-col gap-y-2">
             <h1 className="text-center">Hamburger</h1>
             <div className="text-center">

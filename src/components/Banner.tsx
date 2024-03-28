@@ -12,9 +12,9 @@ const Banner = (props: Props) => {
           <div className="text-light relative  max-w-[1440px]  mx-auto flex flex-col-reverse gap-y-8 md:flex-row items-center justify-between px-6 md:px-16 py-8  ">
             <div className="text-center flex flex-col gap-y-12  lg:w-[60%] w-full md:text-left">
               <div>
-                <h2 className="text-2xl text-tertiary">Spobuj naszych</h2>
+                <h2 className="text-2xl text-tertiary">Try our people</h2>
                 <h1 className="text-clamp font-bold max-w-[38rem] mx-auto md:mx-0  leading-none relative">
-                  Wypasionych satatek
+                  Fantastic salads
                 </h1>
               </div>
 
@@ -27,9 +27,10 @@ const Banner = (props: Props) => {
                   </div>
 
                   <div>
-                    <h1 className="font-bold text-xl">180g miesa</h1>
+                    <h1 className="font-bold text-xl">180g of flesh</h1>
                     <p className="text-secondary">
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                      180g of savory satisfaction. Explore our menu and indulge
+                      today!
                     </p>
                   </div>
                 </div>
@@ -41,12 +42,14 @@ const Banner = (props: Props) => {
                   </div>
 
                   <div>
-                    <h1 className="font-bold text-xl">180g miesa</h1>
+                    <h1 className="font-bold text-xl">180g of flesh</h1>
                     <p className="text-secondary">
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                      180g of savory satisfaction. Explore our menu and indulge
+                      today!
                     </p>
                   </div>
                 </div>
+             
               </div>
             </div>
             <div className="lg:absolute  lg:right-0 lg:-top-16 flex justify-center">

@@ -13,11 +13,13 @@ import kelewele from "./assets/Dishes/Ghanaian/kelewele.png";
 import kenkey from "./assets/Dishes/Ghanaian/kenkey.png";
 import omo_tuo from "./assets/Dishes/Ghanaian/omo_tuo.png";
 import waakye from "./assets/Dishes/Ghanaian/waakye.png";
+import usa from "./assets/Categories/ghana.jpg"
 
 export const dummyData = [
   {
     name: "Jollof Rice",
     category: "Ghanaian",
+    flag: usa ,
     price: "$10.99",
     image: jollof,
     description:

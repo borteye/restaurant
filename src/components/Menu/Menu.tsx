@@ -46,7 +46,7 @@ const Menu: FC<Props> = ({ menuRef }) => {
         </div>
         <div className=" mt-8 flex justify-center items-center">
           <button className="border-2 border-secondary text-secondary font-semibold py-2 px-4 w-fit rounded-full">
-            Czarnjdzke
+            Explore Menu
           </button>
         </div>
         <img
@@ -54,11 +54,7 @@ const Menu: FC<Props> = ({ menuRef }) => {
           alt="tomato"
           className="absolute  w-32 md:w-44 right-0 bottom-2 filter blur-[2px]"
         />
-        {/* <img
-          src={chili}
-          alt="chili"
-          className="absolute transform   filter blur-[1.5px] -left-10 top-48 lg:bottom-12  md:w-44 "
-        /> */}
+     
       </div>
     </div>
   );

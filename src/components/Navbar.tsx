@@ -10,7 +10,7 @@ import logo from "../assets/logo.png";
 
 type Props = {
   homeRef: React.MutableRefObject<null>;
-  menuRef: React.MutableRefObject<null>; 
+  menuRef: React.MutableRefObject<null>;
 };
 
 const Navbar: FC<Props> = ({ homeRef, menuRef }) => {
@@ -24,7 +24,7 @@ const Navbar: FC<Props> = ({ homeRef, menuRef }) => {
         behavior: "smooth",
       });
     }
-    setIsOpen(false)
+    setIsOpen(false);
   };
   const menuPage = () => {
     if (menuRef?.current) {
@@ -32,7 +32,11 @@ const Navbar: FC<Props> = ({ homeRef, menuRef }) => {
         behavior: "smooth",
       });
     }
-    setIsOpen(false)
+    setIsOpen(false);
+  };
+
+  const login = () => {
+    navigate("/login");
   };
 
   return (
@@ -65,36 +69,36 @@ const Navbar: FC<Props> = ({ homeRef, menuRef }) => {
               >
                 Home
               </li>
-              <li className="hover:bg-overlay py-2 px-4 average:px-0 rounded-md cursor-pointer" onClick={menuPage}>
+              <li
+                className="hover:bg-overlay py-2 px-4 average:px-0 rounded-md cursor-pointer"
+                onClick={menuPage}
+              >
                 Menu
-              </li>
-              <li className="hover:bg-overlay py-2 px-4 average:px-0 rounded-md cursor-pointer">
-                O nas
               </li>
             </ul>
             <ul className="flex flex-col average:flex-row gap-8 average:w-fit">
               <li className="flex items-center gap-x-4">
                 <ShoppingCartIcon className="w-5 h-5 text-primary" />
                 <div>
-                  <p className="underline font-medium text-primary">35.00 zt</p>
+                  <p className="underline font-medium text-primary">$5.00</p>
                   <p className="text-secondary">1 product</p>
                 </div>
               </li>
-              <li className="flex average:border-x average:px-4 items-center gap-x-4  border-primary">
-                <ShoppingCartIcon className="w-5 h-5 text-primary" />
-                <div>
-                  <p className="text-light font-medium ">
-                    Poinedzlalek. piatok
-                  </p>
-                  <p className="text-secondary">od 1200 do 2300</p>
-                </div>
-              </li>
+
               <li className="flex items-center gap-x-4">
                 <PhoneIcon className="w-5 h-5 text-primary" />
                 <div>
                   <p className="text-light font-medium">+48 123 456 789</p>
-                  <p className=" underline text-primary">Lorem.</p>
+                  <p className=" underline text-primary">Call Us</p>
                 </div>
+              </li>
+              <li className="flex items-center gap-x-4">
+                <button
+                  onClick={login}
+                  className="bg-primary py-2 px-8 font-semibold rounded-md"
+                >
+                  Login
+                </button>
               </li>
             </ul>
           </div>

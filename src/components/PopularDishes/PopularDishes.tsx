@@ -6,7 +6,7 @@ type Props = {};
 
 const PopularDishes = (props: Props) => {
   return (
-    <section className="flex flex-col">
+    <section className="flex flex-col gap-y-8">
       <div className="flex font-bold items-center justify-between ">
         <h1 className=" text-lg">Popular Dishes</h1>
         <div className="flex items-center text-sm gap-x-2">

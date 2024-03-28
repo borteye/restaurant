@@ -43,12 +43,7 @@ const SideNav = (props: Props) => {
     {
       icon: <ClipboardDocumentListIcon className="w-5 sm:w-7" />,
       name: "Orders",
-      pathname: "/admin",
-    },
-    {
-      icon: <ClipboardDocumentListIcon className="w-5 sm:w-7" />,
-      name: "Orders",
-      pathname: "/admin",
+      pathname: "/orders",
     },
     {
       icon: <ClockIcon className="w-5 sm:w-7" />,
@@ -76,7 +71,7 @@ const SideNav = (props: Props) => {
     {
       icon: <ClipboardDocumentListIcon className="w-5 sm:w-7" />,
       name: "Orders",
-      pathname: "/admin",
+      pathname: "/orders",
     },
     {
       icon: <ClockIcon className="w-5 sm:w-7" />,
@@ -137,10 +132,8 @@ const SideNav = (props: Props) => {
       false
     );
   return (
-    <div className="bg-secondary px-2 justify-center items-center border h-full fixed left-0   ">
-      <ul className="flex flex-col gap-y-8 border border-yellow-700 ">
-        {Privilegdes}
-      </ul>
+    <div className="bg-[#292929] px-2 flex justify-center items-center h-screen fixed left-0   ">
+      <ul className="flex flex-col gap-y-8">{Privilegdes}</ul>
     </div>
   );
 };

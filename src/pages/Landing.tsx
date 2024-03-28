@@ -2,7 +2,7 @@ import {
   ArrowLongRightIcon,
   ShoppingCartIcon,
 } from "@heroicons/react/24/outline";
-import { ArrowLongLeftIcon } from "@heroicons/react/24/solid";
+import { ArrowLongLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import { useRef } from "react";
 import burger from "../assets/burger.png";
 import chili from "../assets/chili.png";
@@ -28,7 +28,7 @@ const Landing = () => {
             <section className="w-screen  max-w-[1440px] m-auto flex flex-col gap-y-36 items-center md:flex-row justify-between px-2 md:px-16">
               <div className="flex flex-col gap-y-8">
                 <h1 className="text-clamp font-bold max-w-md mx-auto md:mx-0 text-center md:text-left leading-none relative">
-                  Burger Spioszek
+                  Burger Sleepyhead
                   <img
                     src={tomato}
                     alt="tomato"
@@ -36,16 +36,17 @@ const Landing = () => {
                   />
                 </h1>
                 <p className="text-secondary text-center w-full max-w-md md:text-left ">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Consequatur dolor provident odio sapiente eius repudiandae,
-                  rem nesciunt facilis?
+                  Experience burger perfection with our Signature Burger: a
+                  succulent beef patty topped with melted cheddar, crispy bacon,
+                  fresh lettuce, tomatoes, and pickles, all nestled in a golden
+                  brioche bun. Savor every bite!
                 </p>
                 <div className="flex flex-col max-w-60 w-full mx-auto md:mx-0  gap-y-4 relative">
                   <button className="flex items-center justify-center font-bold gap-x-2 bg-gradient-to-r from-gradientStart to-gradientEnd px-6 py-4 rounded-full">
-                    Do koszyka <ShoppingCartIcon className="w-5 h-5" />
+                    To shopping cart <ShoppingCartIcon className="w-5 h-5" />
                   </button>
                   <button className="flex items-center justify-center border-2 font-bold gap-x-2 px-6 py-4 rounded-full">
-                    Do koszyka <ShoppingCartIcon className="w-5 h-5" />
+                    Learn More <ChevronRightIcon className="w-5 h-5" />
                   </button>
                   <img
                     src={chili}
@@ -67,7 +68,7 @@ const Landing = () => {
                   </p>
                 </div>
                 <p className="bg-gradient-to-r from-gradientStart to-gradientEnd py-2 px-4 font-medium rounded-full absolute top-8 left-[8.5rem]">
-                  26.99 zt
+                  $6.99
                 </p>
                 <div className="bg-new text-sm md:text-lg p-5 md:p-7 font-bold h-4 w-4 md:h-6 md:w-6 rounded-[50%] flex items-center justify-center absolute right-[2.5rem] md:right-[9.5rem] top-20">
                   New
