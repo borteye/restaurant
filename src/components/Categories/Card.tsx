@@ -1,17 +1,22 @@
-import React from "react";
+import React, { FC } from "react";
 import pizzaIcon from "../../assets/Categories/usa.jpg";
+import { CategoryCardProps } from "../../types/dishes";
 
-
-type Props = {};
-
-const Card = (props: Props) => {
+const Card: FC<CategoryCardProps> = ({ data }) => {
   return (
-    <div className="flex flex-col justify-center items-center">
-      <div className="bg-[#292929] flex flex-col w-24 h-24 justify-center items-center p-4 rounded-[50%] ">
-        <img src={pizzaIcon} alt="category icon" className="" />
-        <p className="text-secondary font-bold">USA</p>
-      </div>
-    
+    <div className="flex gap-x-16  justify-center items-center">
+      {data?.map((item) => {
+        return (
+          <div
+            key={item?.categoryid}
+            className="bg-[#292929] cursor-pointer flex flex-col w-28 h-28 justify-center items-center p-4 rounded-[50%] "
+          >
+            <p className="text-secondary font-bold text-sm text-center">
+              {item?.name}
+            </p>
+          </div>
+        );
+      })}
     </div>
   );
 };

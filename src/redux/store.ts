@@ -11,9 +11,13 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import userReducer from "./features/userSlice";
+import dishReducer from "./features/dishSlice";
+import filterReducer from "./features/filterSlice";
 
 const rootReducer = combineReducers({
   user: userReducer,
+  dish: dishReducer,
+  filter: filterReducer,
 });
 
 const persistConfig = {

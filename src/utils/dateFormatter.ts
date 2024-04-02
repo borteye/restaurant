@@ -8,8 +8,8 @@ const dateFormatter = () => {
   const year = currentDate.getFullYear();
 
   const formattedDate = `${month} ${day}, ${year}`;
-  console.log(formattedDate);
   return formattedDate;
 };
 
 export default dateFormatter;
+  

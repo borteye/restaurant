@@ -38,7 +38,7 @@ const Login = () => {
 
     onSubmit: async (values: LoginValues) => {
       try {
-        const url: string = "http://localhost:5000/auth/login";
+        const url: string = `${process.env.REACT_APP_API_URL}/auth/login`;
         const method: string = "POST";
         const body = values;
 
@@ -47,8 +47,6 @@ const Login = () => {
           method,
           body,
         });
-
-        console.log(result, success, error);
 
         if (success) {
           disptach(
@@ -70,8 +68,6 @@ const Login = () => {
       }
     },
   });
-
-  console.log(formik.errors);
 
   const { values, touched, handleBlur, handleChange, handleSubmit, errors } =
     formik;

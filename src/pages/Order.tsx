@@ -29,17 +29,22 @@ const Order = ({ homePath = "/home", orderPath = "/orders" }) => {
     title: "By Status",
     icon: <CheckCircleIcon className="w-6" />,
     options: [
-      { name: "All", quantity: 1 },
-      { name: "All", quantity: 1 },
-      { name: "All", quantity: 1 },
-      { name: "All", quantity: 1 },
+      { name: "All", quantity: 1, optionId: 1 },
+      { name: "All", quantity: 1, optionId: 2 },
+      { name: "All", quantity: 1, optionId: 3 },
+      { name: "All", quantity: 1, optionId: 4 },
     ],
   };
 
   const filterBy1 = {
     title: "By Date",
     icon: <CalendarIcon className="w-6" />,
-    options: [{ name: "Hi", quantity: 1 }],
+    options: [
+      { name: "All", quantity: 1, optionId: 1 },
+      { name: "All", quantity: 1, optionId: 2 },
+      { name: "All", quantity: 1, optionId: 3 },
+      { name: "All", quantity: 1, optionId: 4 },
+    ],
   };
   return (
     <section
@@ -83,16 +88,16 @@ const Order = ({ homePath = "/home", orderPath = "/orders" }) => {
           <div className="flex items-center justify-between">
             <SearchInput placeHolder="search" width="w-fit" boxShadow={false} />
             <div className="flex gap-x-8">
-              <Filter
+              {/* <Filter
                 filterBy={filterBy}
-                width={"min-w-[14rem]"}
-                borderColor={""}
-              />
-              <Filter
+                width="min-w-[14rem]"
+                position="right-12"
+              /> */}
+              {/* <Filter
                 filterBy={filterBy1}
-                width={"min-w-[14rem]"}
-                borderColor={""}
-              />
+                width="min-w-[14rem]"
+                position="right-12"
+              /> */}
             </div>
           </div>
         </div>

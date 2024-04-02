@@ -2,10 +2,20 @@ import React from "react";
 
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import Card from "./Card";
+import { useQuery } from "@tanstack/react-query";
+import { Category } from "../../types/dishes";
 
 type Props = {};
 
 const Categories = (props: Props) => {
+  const getCategories = () => {
+    return fetch("http://localhost:5000/categories").then((res) => res.json());
+  };
+  const { data } = useQuery<Category[], Error>({
+    queryKey: ["categories"],
+    queryFn: getCategories,
+  });
+
   return (
     <section className="flex flex-col gap-y-8">
       <div className="flex font-bold items-center justify-between ">
@@ -18,7 +28,7 @@ const Categories = (props: Props) => {
         </div>
       </div>
       <div className="flex gap-x-8 overflow-x-scroll no-scrollbar">
-        <Card />
+        <Card data={data} />
       </div>
     </section>
   );
