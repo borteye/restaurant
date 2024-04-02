@@ -15,8 +15,11 @@ const PopularDishes = (props: Props) => {
   const countrySelected = useSelector(selectCountry);
   const selectedCountryId = useSelector(selectCountryId);
   const getDishes = () => {
-    return fetch("http://localhost:5000/all-dishes").then((res) => res.json());
+    return fetch(
+      `http://localhost:5000/all-dishes`
+    ).then((res) => res.json());
   };
+
   const { data } = useQuery({
     queryKey: ["dishes"],
     queryFn: getDishes,

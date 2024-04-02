@@ -44,7 +44,7 @@ interface CountryDetails {
 
 interface DishDetails {
   dish: {
-    dish: {
+    dishes: {
       dishid: number;
       name: string;
       description: string;
