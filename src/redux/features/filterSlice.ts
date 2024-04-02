@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { CountryDetails } from "../../types/dishes";
 
 const initialState = {
   country: null,
@@ -21,7 +22,7 @@ export const filterSlice = createSlice({
 
 export const { ActiveFilter, SessionResetFilter } = filterSlice.actions;
 
-export const selectCountry = (state: any) => state.country;
-export const selectCountryId = (state: any) => state.countryid;
+export const selectCountry = ({ filter }: CountryDetails) => filter.country;
+export const selectCountryId = ({ filter }: CountryDetails) => filter.countryid;
 
 export default filterSlice.reducer;

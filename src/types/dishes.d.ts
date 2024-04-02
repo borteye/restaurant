@@ -35,24 +35,24 @@ type Countries = {
   countryid: number;
 };
 
-type Country = {
-  country: string;
-  countryid: number;
-};
-
 interface CountryDetails {
-  filter;
+  filter: {
+    country: string;
+    countryid: number;
+  };
 }
 
-interface DishInfo {
+interface DishDetails {
   dish: {
-    dishid: number;
-    name: string;
-    description: string;
-    price: string;
-    available: number;
-    categoryid: number;
-    countryid: number;
+    dish: {
+      dishid: number;
+      name: string;
+      description: string;
+      price: string;
+      available: number;
+      categoryid: number;
+      countryid: number;
+    }[];
   };
 }
 
@@ -63,6 +63,5 @@ export {
   Category,
   CategoryCardProps,
   Countries,
-  Country,
-  DishInfo,
+  CountryDetails,
 };

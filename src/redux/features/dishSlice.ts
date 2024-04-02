@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { UserDetails } from "../../types/user";
-import { DishInfo } from "../../types/dishes";
+import { DishDetails } from "../../types/dishes";
 
 const initialState = {
-  dish: [] as DishInfo[],
+  dish: null,
 };
 
 export const dishSlice = createSlice({
@@ -19,11 +19,6 @@ export const dishSlice = createSlice({
 
 export const { ActiveCountryDishes, LogoutLever } = dishSlice.actions;
 
-export const countryDishes = ({ dish }: DishInfo) => dish;
-console.log(countryDishes);
-// export const selectEmail = ({ user }: UserDetails) => user.email;
-// export const selectUsername = ({ user }: UserDetails) => user.username;
-// export const selectRole = ({ user }: UserDetails) => user.role;
-// export const selectstaySignedIn = (state: UserDetails) => state.staySignedIn;
+export const countryDishes = (state: DishDetails) => state.dish;
 
 export default dishSlice.reducer;

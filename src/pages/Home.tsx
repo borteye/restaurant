@@ -23,16 +23,18 @@ const Home = (props: Props) => {
     );
   };
 
-  const { data, isLoading, isError } = useQuery<Countries[], Error>({
-    queryKey: ["countries"],
-    queryFn: getCountries,
-  });
+  const { data, isLoading, isError, isFetching } = useQuery<Countries[], Error>(
+    {
+      queryKey: ["countries"],
+      queryFn: getCountries,
+    }
+  );
 
+  console.log({ isLoading, isFetching });
   const countries = {
     title: "Country",
     icon: <GlobeAltIcon className="w-6" />,
     options: data,
-
   };
 
   return (
