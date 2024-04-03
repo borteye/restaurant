@@ -3,10 +3,7 @@ import React, { FC, useState } from "react";
 import { UseDispatch, useDispatch, useSelector } from "react-redux";
 import { ActiveFilter } from "../redux/features/filterSlice";
 import { MutationFunction, useMutation } from "@tanstack/react-query";
-import {
-  ActiveCountryDishes,
-  countryDishes,
-} from "../redux/features/dishSlice";
+import { DishCatalog } from "../redux/features/dishSlice";
 
 type Props = {
   filterBy: {
@@ -35,38 +32,35 @@ const Filter: FC<Props> = ({ filterBy, width, borderColor, position }) => {
     setIsFilterVisible(!isFilterVisible);
   };
 
-  // const getCountryDishes = async ({ name, countryid }: any) => {
-  //   const body = {
-  //     name,
-  //     countryid,
-  //   };
-  //   console.log(body);
-  //   return await fetch(`http://localhost:5000/dishes/:${name}/:${countryid}`, {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     method: "POST",
-  //     body: JSON.stringify(body),
-  //   }).then((res) => res.json());
-  // };
+  const getCountryDishes = async ({ name, countryid }: any) => {
+    const body = {
+      name,
+      countryid,
+    };
+    console.log(body);
+    return await fetch(`http://localhost:5000/dishes/:${name}/:${countryid}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify(body),
+    }).then((res) => res.json());
+  };
 
-  // const onSuccess = (data: any) => {
+  const onSuccess = (data: any) => {
+    dispatch(DishCatalog(data));
+  };
 
-  //   dispatch(ActiveCountryDishes(data));
-  // };
+  const onError = (error: any) => {
+    console.log(error);
+  };
 
-  // const onError = (error: any) => {
-  //   console.log(error);
-  // };
-
-  // const {dish} = useSelector(countryDishes);
-
-  // const { mutate } = useMutation({
-  //   mutationKey: ["getCountryDishes"],
-  //   mutationFn: getCountryDishes,
-  //   onSuccess,
-  //   onError,
-  // });
+  const { mutate } = useMutation({
+    mutationKey: ["getCountryDishes"],
+    mutationFn: getCountryDishes,
+    onSuccess,
+    onError,
+  });
 
   const handleSelect = (name: string, countryid: number) => {
     setSelect(name);
@@ -76,7 +70,7 @@ const Filter: FC<Props> = ({ filterBy, width, borderColor, position }) => {
         countryid: countryid,
       })
     );
-    // mutate({ name, countryid });
+    mutate({ name, countryid });
   };
 
   return (

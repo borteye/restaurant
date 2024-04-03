@@ -3,7 +3,7 @@ import React from "react";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import Card from "./Card";
 import { useQuery } from "@tanstack/react-query";
-import { Category } from "../../types/dishes";
+import { BasicCategoryInfo } from "../../types/dishes";
 
 type Props = {};
 
@@ -11,7 +11,7 @@ const Categories = (props: Props) => {
   const getCategories = () => {
     return fetch("http://localhost:5000/categories").then((res) => res.json());
   };
-  const { data } = useQuery<Category[], Error>({
+  const { data } = useQuery<BasicCategoryInfo[], Error>({
     queryKey: ["categories"],
     queryFn: getCategories,
   });

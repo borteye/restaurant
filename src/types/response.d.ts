@@ -9,9 +9,9 @@ interface loginResponse {
   error?: string;
 }
 
-interface signupResponse {
+type signupResponse = {
   success?: string;
   error?: string;
-}
+};
 
 export { loginResponse, signupResponse };

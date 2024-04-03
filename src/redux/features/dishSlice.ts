@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { UserDetails } from "../../types/user";
 import { DishDetails } from "../../types/dishes";
 
 const initialState = {
-  allDishes: null,
+  dishes: [],
   dish: null,
 };
 
@@ -11,19 +10,18 @@ export const dishSlice = createSlice({
   name: "dish",
   initialState,
   reducers: {
-    AllDishes: (state, { payload }) => {
-      state.allDishes = payload;
+    DishCatalog: (state, { payload }) => {
+      state.dishes = payload;
     },
-    ActiveCountryDishes: (state, { payload }) => {
-      state.dish = payload;
-    },
+    
     LogoutLever: (state) => {},
   },
 });
 
-export const { ActiveCountryDishes, LogoutLever } = dishSlice.actions;
+export const { DishCatalog, LogoutLever } =
+  dishSlice.actions;
 
-export const countryDishes = (state: DishDetails) => state.dish;
-// export const allDishes = (state: ) => state.
+// export const countryDishes = (state: DishDetails) => state.
+export const dishes = ({dish}: DishDetails) => dish.dishes;
 
 export default dishSlice.reducer;

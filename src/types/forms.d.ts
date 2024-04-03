@@ -13,20 +13,20 @@ type TextFieldProps = {
   handleBlur?: FocusEventHandler<HTMLInputElement> | undefined;
 };
 
-interface LoginValues {
+type LoginValues = {
   username: string;
   password: string;
   staySignedIn?: boolean;
 }
 
-interface SignUpValues {
+type SignUpValues  = {
   username: string;
   email: string;
   password: string;
   confirmPassword: string;
 }
 
-export interface FetchProps {
+interface FetchProps {
   url: string;
   method: string;
   body?: {

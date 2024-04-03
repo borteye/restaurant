@@ -13,11 +13,13 @@ import storage from "redux-persist/lib/storage";
 import userReducer from "./features/userSlice";
 import dishReducer from "./features/dishSlice";
 import filterReducer from "./features/filterSlice";
+import cartReducer from "./features/cartSlice";
 
 const rootReducer = combineReducers({
   user: userReducer,
   dish: dishReducer,
   filter: filterReducer,
+  cart: cartReducer,
 });
 
 const persistConfig = {

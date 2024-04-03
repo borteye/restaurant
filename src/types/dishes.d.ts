@@ -1,24 +1,44 @@
-interface FoodDetails {
+type BasicFoodInfo = {
   name: string;
   category: string;
   price: string;
   image: string;
   description: string;
+};
+
+interface MenuFoodProps {
+  dish: {
+    name: string;
+    category: string;
+    price: string;
+    image: string;
+    description: string;
+  };
 }
 
+type BasicPopularDishesInfo = {
+  dishId: number;
+  name: string;
+  description: string;
+  price: string;
+  available: string;
+  countryid: number;
+  categoryid: number;
+};
+
 interface PopularDishesCardProps {
-  data: {
-    dishId: number;
+  dish: {
+    dishid: number;
     name: string;
     description: string;
     price: string;
-    available: string;
+    available: number;
     countryid: number;
     categoryid: number;
-  }[];
+  };
 }
 
-type Category = {
+type BasicCategoryInfo = {
   name: string;
   categoryid: number;
 };
@@ -30,7 +50,7 @@ interface CategoryCardProps {
   }[];
 }
 
-type Countries = {
+type BasicCountryInfo = {
   name: string;
   countryid: number;
 };
@@ -56,12 +76,33 @@ interface DishDetails {
   };
 }
 
+interface CartDetails {
+  cart: {
+    dishid: number;
+    name: string;
+    quantity: number;
+    price: any;
+    totalPrice: number;
+  }[];
+}
+
+type BasicCartInfo = {
+  dishid: number;
+  name: string;
+  quantity: number;
+  price: string;
+  totalPrice: number;
+};
 export {
-  FoodDetails,
-  DishDetails,
-  PopularDishesCardProps,
-  Category,
+  BasicCategoryInfo,
+  BasicCountryInfo,
+  BasicFoodInfo,
+  BasicPopularDishesInfo,
   CategoryCardProps,
-  Countries,
   CountryDetails,
+  DishDetails,
+  MenuFoodProps,
+  PopularDishesCardProps,
+  CartDetails,
+  BasicCartInfo,
 };
