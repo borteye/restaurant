@@ -78,31 +78,45 @@ interface DishDetails {
 
 interface CartDetails {
   cart: {
+    items: {
+      dishid: number;
+      name: string;
+      quantity: number;
+      price: number;
+      totalPrice: number;
+    }[];
+  };
+}
+
+type Item = {
+  dishid: number;
+  name: string;
+  price: number;
+  quantity: number;
+  totalPrice: number;
+};
+
+interface CartState {
+  items: Item[];
+}
+
+interface CartCardProps {
+  dish: {
     dishid: number;
     name: string;
     quantity: number;
-    price: any;
+    price: number;
     totalPrice: number;
-  }[];
+  };
 }
 
-type BasicCartInfo = {
-  dishid: number;
-  name: string;
-  quantity: number;
-  price: string;
-  totalPrice: number;
-};
 export {
   BasicCategoryInfo,
   BasicCountryInfo,
   BasicFoodInfo,
-  BasicPopularDishesInfo,
-  CategoryCardProps,
+  BasicPopularDishesInfo, CartCardProps, CartDetails, CartState, CategoryCardProps,
   CountryDetails,
-  DishDetails,
-  MenuFoodProps,
-  PopularDishesCardProps,
-  CartDetails,
-  BasicCartInfo,
+  DishDetails, Item, MenuFoodProps,
+  PopularDishesCardProps
 };
+

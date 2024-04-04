@@ -15,6 +15,7 @@ import Filter from "../components/Filter";
 import { useSelector } from "react-redux";
 import { selectRole } from "../redux/features/userSlice";
 import { roles } from "../roles";
+import OrderCard from "../components/OrderCard";
 
 type Props = {
   homePath: string;
@@ -69,19 +70,10 @@ const Order = ({ homePath = "/home", orderPath = "/orders" }) => {
           <h1 className="text-2xl font-bold">Order history</h1>
           {role === roles.admin && (
             <div className="flex justify-between ">
-              <div className="text-light">
-                <div className="flex items-center gap-x-6">
-                  <div className="bg-secondary w-fit p-3 rounded-xl">
-                    <StarIcon className="w-7" />
-                  </div>
-                  <div className="text-black">
-                    <p className="text-sm text-secondary">
-                      Satisfaction Rating
-                    </p>
-                    <h1 className="text-2xl font-bold ">95%</h1>
-                  </div>
-                </div>
-              </div>
+              <OrderCard />
+              <OrderCard />
+              <OrderCard />
+              <OrderCard />
             </div>
           )}
 

@@ -8,10 +8,8 @@ import burger from "../assets/burger.png";
 import chili from "../assets/chili.png";
 import tomato from "../assets/tomato.png";
 import Banner from "../components/Banner";
-import Navbar from "../components/Navbar";
 import Menu from "../components/Menu/Menu";
-
-type Props = {};
+import Navbar from "../components/Navbar";
 
 const Landing = () => {
   const homeRef = useRef(null);

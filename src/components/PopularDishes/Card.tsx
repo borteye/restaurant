@@ -1,9 +1,9 @@
-import React, { FC, useState } from "react";
+import React, { FC, useReducer, useState } from "react";
 import burger from "../../assets/burger.png";
-import { BasicCartInfo, PopularDishesCardProps } from "../../types/dishes";
+import { PopularDishesCardProps } from "../../types/dishes";
 import { selectCountryId } from "../../redux/features/filterSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { ShoppingCartIcon, PlusIcon } from "@heroicons/react/24/outline";
 import {
   addToCart,
   cartItems,
@@ -14,11 +14,12 @@ type Props = {};
 const Card: FC<PopularDishesCardProps> = ({ dish }) => {
   const dispatch = useDispatch();
 
+  const price = parseFloat(dish?.price);
+
   const cart = useSelector(cartItems);
+  const exist = cart?.find((doc) => doc.dishid === dish.dishid);
 
-  const exist = cart.find((doc) => doc.dishid === dish.dishid);
-
-  const handleAddToCart = (dishid: number, name: string, price: string) => {
+  const handleAddToCart = (dishid: number, name: string, price: number) => {
     dispatch(
       addToCart({
         dishid: dishid,
@@ -29,6 +30,15 @@ const Card: FC<PopularDishesCardProps> = ({ dish }) => {
       })
     );
   };
+
+  const handleUpdateCart = (dishid: number) => {
+    dispatch(
+      updateCart({
+        dishid: dishid,
+      })
+    );
+  };
+
   return (
     <div className=" max-w-[15rem] min-w-[15rem] cursor-pointer  font-bold">
       <div className="flex justify-center">
@@ -42,21 +52,21 @@ const Card: FC<PopularDishesCardProps> = ({ dish }) => {
           </p>
           <div className="text-center">
             <p className="text-xs text-secondary">Starting From</p>
-            <p>${dish?.price}</p>
+            <p>${price}</p>
           </div>
           <div className="flex items-center justify-between text-sm ">
             <div>4.5</div>
             <button
               onClick={() => {
                 if (exist) {
-                  dispatch(updateCart(1));
+                  handleUpdateCart(dish?.dishid);
                 } else if (!exist) {
-                  handleAddToCart(dish?.dishid, dish?.name, dish?.price);
+                  handleAddToCart(dish?.dishid, dish?.name, price);
                 }
               }}
-              className="bg-gradient-to-r cursor-pointer from-cartGradientStart to-cartGradientEnd px-2 py-[0.125rem] rounded-3xl"
+              className="bg-gradient-to-r cursor-pointer from-cartGradientStart to-cartGradientEnd p-1 rounded-3xl"
             >
-              <ShoppingCartIcon className="w-5 h-5" />
+              <PlusIcon className="w-5 h-5" />
             </button>
           </div>
         </div>

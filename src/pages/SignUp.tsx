@@ -1,19 +1,17 @@
+import { useFormik } from "formik";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { authSignupSchema } from "../AuthenticationSchema";
 import github from "../assets/github.svg";
 import google from "../assets/google.svg";
 import logo from "../assets/logo.png";
 import foodImg from "../assets/signup.jpg";
 import InputField from "../components/InputField";
-import { useFormik } from "formik";
-import { authSignupSchema } from "../AuthenticationSchema";
-import { SignUpValues } from "../types/forms";
 import { fetchData } from "../hooks/fetch";
+import { SignUpValues } from "../types/forms";
 import { signupResponse } from "../types/response";
 
-type Props = {};
-
-const SignUp = (props: Props) => {
+const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
@@ -25,6 +23,7 @@ const SignUp = (props: Props) => {
   const login = () => {
     navigate("/login");
   };
+
   const formik = useFormik({
     initialValues: {
       username: "",
