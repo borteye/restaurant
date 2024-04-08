@@ -37,8 +37,8 @@ const SideNav = (props: Props) => {
     },
     {
       icon: <UsersIcon className="w-5 sm:w-7" />,
-      name: "Users",
-      pathname: "/admin",
+      name: "Customers",
+      pathname: "/customers-list",
     },
     {
       icon: <ClipboardDocumentListIcon className="w-5 sm:w-7" />,

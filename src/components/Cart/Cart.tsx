@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MapPinIcon } from "@heroicons/react/24/solid";
 import { ClockIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
 import Card from "./Card";
 import { useSelector } from "react-redux";
 import { cartItems } from "../../redux/features/cartSlice";
+import { orderNumberGenerator } from "../../utils/numberGenerator";
 
 type Props = {
   isActive: boolean;
 };
 
 const Cart = ({ isActive }: Props) => {
+  const [orderNumber, setOrderNumber] = useState<string | null>(null);
   const cart = useSelector(cartItems);
-
-  console.log(cart);
 
   const total = cart?.reduce((total, item) => {
     return total + item?.totalPrice;
@@ -27,7 +27,16 @@ const Cart = ({ isActive }: Props) => {
     }
   };
 
-  let t: {};
+  useEffect(() => {
+    if (cart?.length >= 1) {
+      const randomNumber = orderNumberGenerator();
+      setOrderNumber(randomNumber);
+    } else {
+      setOrderNumber("");
+    }
+  }, [cart]);
+
+  console.log(orderNumber);
 
   return (
     <div
@@ -51,12 +60,11 @@ const Cart = ({ isActive }: Props) => {
           <ShoppingCartIcon className="w-7" />
           Cart
         </p>
-        <p className="text-[#a7a7a7]">Order ID: #1099 </p>
+        <p className="text-[#a7a7a7]">Order ID: #{orderNumber}</p>
       </div>
       <div className="flex flex-col gap-y-10  ">
         {cart.length ? (
           cart?.map((dish, i) => {
-            console.log(dish?.totalPrice);
             return <Card dish={dish} key={i} />;
           })
         ) : (

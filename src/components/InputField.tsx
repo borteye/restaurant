@@ -15,19 +15,39 @@ const InputField: FC<TextFieldProps> = ({
   touchedUsername,
   touchedEmail,
   handleBlur,
+  background,
+  border_bottom,
+  rounded,
+  width,
+  fullNameError,
+  touchedFullName,
+  streetNameError,
+  touchedStreetName,
+  streetNumberError,
+  touchedStreetNumber,
+  postalCodeError,
+  touchedPostalCode,
+  cityError,
+  touchedCity,
 }) => {
   return (
     <>
       {!password && (
         <input
           type={type}
-          className={`w-full outline-none text-black rounded-md ${
-            type !== "password" && "bg-tertiary px-4 py-1"
+          className={`${width} outline-none text-black  ${rounded} ${
+            type !== "password" && `bg-${background} px-4 py-1`
           } ${
-            (usernameError && touchedUsername) || (emailError && touchedEmail)
+            (usernameError && touchedUsername) ||
+            (emailError && touchedEmail) ||
+            (fullNameError && touchedFullName) ||
+            (streetNameError && touchedStreetName) ||
+            (streetNumberError && touchedStreetNumber) ||
+            (postalCodeError && touchedPostalCode) ||
+            (cityError && touchedCity)
               ? "input-error"
               : ""
-          }  `}
+          } ${border_bottom}  `}
           value={value}
           name={name}
           onChange={handleChange}

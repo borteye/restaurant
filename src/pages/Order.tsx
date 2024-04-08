@@ -71,9 +71,7 @@ const Order = ({ homePath = "/home", orderPath = "/orders" }) => {
           {role === roles.admin && (
             <div className="flex justify-between ">
               <OrderCard />
-              <OrderCard />
-              <OrderCard />
-              <OrderCard />
+              
             </div>
           )}
 

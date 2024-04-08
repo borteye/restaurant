@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import { selectRole } from "./redux/features/userSlice";
 import { roles } from "./roles";
 import Order from "./pages/Order";
+import Customers from "./pages/Customers";
 
 function App() {
   const role = useSelector(selectRole);
@@ -31,6 +32,7 @@ function App() {
               <Route element={<ProtectedRoutes />}>
                 <Route path="/home" element={<Home />} />
                 <Route path="/orders" element={<Order />} />
+                <Route path="/customers-list" element={<Customers />} />
               </Route>
             </Route>
           ) : role && role === roles.customer ? (

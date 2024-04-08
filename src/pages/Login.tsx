@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { authLoginSchema } from "../AuthenticationSchema";
+import { authLoginSchema } from "../schemas/AuthenticationSchema";
 import github from "../assets/github.svg";
 import google from "../assets/google.svg";
 import food from "../assets/login.jpg";
@@ -96,6 +96,9 @@ const Login = () => {
                       usernameError={errors.username}
                       touchedUsername={touched.username}
                       handleBlur={handleBlur}
+                      background={"tertiary"}
+                      rounded={"rounded-md"}
+                      width={"w-full"}
                     />
                     {errors.username && touched.username ? (
                       <div className="text-error">{errors.username}</div>

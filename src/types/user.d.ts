@@ -9,4 +9,12 @@ interface UserDetails {
   staySignedIn?: boolean;
 }
 
-export { UserDetails };
+type CheckOutInfo = {
+  fullName: string;
+  streetName: string;
+  streetNumber: number;
+  postalCode: number;
+  city: string;
+};
+
+export { UserDetails, CheckOutInfo };

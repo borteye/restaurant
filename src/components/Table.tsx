@@ -48,22 +48,46 @@ const Table = ({ homePath = "/home", orderPath = "/orders" }) => {
           </table>
         </div>
       ) : pathname === orderPath ? (
-        <div className="overflow-x-scroll border w-[screen]  h-full no-scrollbar">
-          <div className="flex justify-between gap-x-6 w-[screen] border border-red-500 items-center font-semibold py-6 ">
-            <p className=" min-w-[18rem]">Customer</p>
-            <p className="min-w-[18rem] ">Address</p>
-            <p className="min-w-[18rem] ">Menu</p>
-            <p className="min-w-[18rem] border">Status</p>
+        <div className="flex ">
+          <div className="overflow-x-scroll  w-full  h-full no-scrollbar">
+            <div className="flex justify-between gap-x-6 pr-8  min-w-fit border-b-2 items-center font-semibold py-6 ">
+              <p className=" min-w-[15rem]">Customer</p>
+              <p className="min-w-[15rem] ">Address</p>
+              <p className="min-w-[15rem] ">Ordered Date</p>
+              <p className="min-w-[9rem] ">Status</p>
+            </div>
+
+            <div className="flex items-center gap-x-6 pr-8 cursor-pointer hover:bg-[#F4F7F9] py-6 min-w-fit border-b justify-between">
+              <p className="flex min-w-[15rem] items-center gap-x-2 font-semibold ">
+                <img src={burger} alt="" className="w-10" />
+                Gabriel Borteye
+              </p>
+              <p className="min-w-[15rem] ">Address</p>
+              <p className="min-w-[15rem] ">24/04/2024</p>
+              <p className="min-w-[9rem] bg-red-500 text-center   ">Status</p>
+            </div>
           </div>
-          <hr />
-          <div className="flex items-center gap-x-6 justify-between">
-          <p className="flex min-w-[18rem] items-center gap-x-4 font-semibold " >
-            <img src={burger} alt="" className="w-14" />
-            Gabriel Borteye
-          </p>
-            <p className="min-w-[18rem] ">Address</p>
-            <p className="min-w-[18rem] ">Menu</p>
-            <p className="min-w-[18rem] ">Status</p>
+          <div className="w-[30%] flex flex-col gap-y-10 p-6 bg-[#F4F7F9]">
+            <h1 className="text-2xl font-semibold">Detail Order</h1>
+            <ul className="flex gap-x-6 border-b font-semibold">
+              <li className="border-green-900 border-b-2 py-4">Items</li>
+              <li className="py-4">Review</li>
+            </ul>
+
+            <div className="mt-10 flex justify-between items-center">
+              <div className="flex items-center gap-x-6">
+                <img src={burger} alt="" className="w-16" />
+                <div>
+                  <p className="">Burger double cheese</p>
+                  <p className="text-sm text-secondary">$20.49</p>
+                </div>
+              </div>
+              <p>2 items</p>
+            </div>
+            <div className="flex justify-between items-center">
+              <p className="text-2xl font-semibold">Total</p>
+              <p>$40.98</p>
+            </div>
           </div>
         </div>
       ) : (

@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { authSignupSchema } from "../AuthenticationSchema";
+import { authSignupSchema } from "../schemas/AuthenticationSchema";
 import github from "../assets/github.svg";
 import google from "../assets/google.svg";
 import logo from "../assets/logo.png";
@@ -85,6 +85,9 @@ const SignUp = () => {
                       usernameError={errors.username}
                       touchedUsername={touched.username}
                       handleBlur={handleBlur}
+                      background={"tertiary"}
+                      rounded={"rounded-md"}
+                      width={"w-full"}
                     />
                     {errors.username && touched.username ? (
                       <div className="text-error">{errors.username}</div>
@@ -106,6 +109,9 @@ const SignUp = () => {
                       emailError={errors.email}
                       touchedEmail={touched.email}
                       handleBlur={handleBlur}
+                      background={"tertiary"}
+                      rounded={"rounded-md"}
+                      width={"w-full"}
                     />
                     {errors.email && touched.email ? (
                       <div className="text-error">{errors.email}</div>

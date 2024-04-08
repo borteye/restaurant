@@ -11,6 +11,7 @@ import { cartItems } from "../redux/features/cartSlice";
 import { BasicCountryInfo } from "../types/dishes";
 import dateFormatter from "../utils/dateFormatter";
 import Order from "./Order";
+import CheckOut from "../components/CheckOut";
 
 const Home = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -38,7 +39,7 @@ const Home = () => {
   const cart = useSelector(cartItems);
 
   return (
-    <div className="w-[calc(100%-51px)] relative md:w-[calc(100%-60px)] bg-[#1d1d1d] text-light h-screen overflow-y-scroll no-scrollbar justify-between p-6  flex ">
+    <div className=" w-[calc(100%-51px)]  md:w-[calc(100%-60px)] bg-[#1d1d1d] text-light h-screen overflow-y-scroll no-scrollbar justify-between p-6  flex ">
       <div
         className={`${
           isActive ? "w-[73%]" : "w-full"
@@ -80,6 +81,7 @@ const Home = () => {
       </div>
 
       <Cart isActive={isActive} />
+      <CheckOut/>
     </div>
   );
 };
