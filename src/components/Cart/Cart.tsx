@@ -2,23 +2,23 @@ import React, { useEffect, useState } from "react";
 import { MapPinIcon } from "@heroicons/react/24/solid";
 import { ClockIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
 import Card from "./Card";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { cartItems } from "../../redux/features/cartSlice";
-import { orderNumberGenerator } from "../../utils/numberGenerator";
+import { orderNumberGenerator } from "../../utils/idGenerator";
+import { selectId } from "../../redux/features/userSlice";
 
 type Props = {
   isActive: boolean;
+  setIsCheckoutActive: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Cart = ({ isActive }: Props) => {
-  const [orderNumber, setOrderNumber] = useState<string | null>(null);
+const Cart = ({ isActive, setIsCheckoutActive }: Props) => {
   const cart = useSelector(cartItems);
 
-  const total = cart?.reduce((total, item) => {
-    return total + item?.totalPrice;
+  const total = cart?.reduce((total, dish) => {
+    return total + dish?.totalPrice;
   }, 0);
 
-  console.log(total);
   const isButtonDisabled = () => {
     if (cart?.length) {
       return false;
@@ -27,16 +27,9 @@ const Cart = ({ isActive }: Props) => {
     }
   };
 
-  useEffect(() => {
-    if (cart?.length >= 1) {
-      const randomNumber = orderNumberGenerator();
-      setOrderNumber(randomNumber);
-    } else {
-      setOrderNumber("");
-    }
-  }, [cart]);
-
-  console.log(orderNumber);
+  const handleConfirmOrder = () => {
+    setIsCheckoutActive(true);
+  };
 
   return (
     <div
@@ -44,7 +37,7 @@ const Cart = ({ isActive }: Props) => {
         isActive ? "flex" : "hidden"
       } flex-col justify-between top-4 inset-y-4 right-4`}
     >
-      <div className="bg-[#6D6D6D] p-6 flex flex-col gap-y-4 rounded-3xl">
+      {/* <div className="bg-[#6D6D6D] p-6 flex flex-col gap-y-4 rounded-3xl">
         <h1 className="text-2xl font-semibold ">DELIVERY ADDRESS</h1>
         <p className="text-sm flex items-center gap-x-2">
           <MapPinIcon className="w-5" />
@@ -54,14 +47,11 @@ const Cart = ({ isActive }: Props) => {
           <ClockIcon className="w-5" />
           20 min
         </p>
-      </div>
-      <div className="flex items-center justify-between">
-        <p className="flex items-center gap-x-3">
-          <ShoppingCartIcon className="w-7" />
-          Cart
-        </p>
-        <p className="text-[#a7a7a7]">Order ID: #{orderNumber}</p>
-      </div>
+      </div> */}
+      <p className="flex items-center gap-x-3">
+        <ShoppingCartIcon className="w-7" />
+        Cart
+      </p>
       <div className="flex flex-col gap-y-10  ">
         {cart.length ? (
           cart?.map((dish, i) => {
@@ -91,6 +81,7 @@ const Cart = ({ isActive }: Props) => {
       </div>
       <button
         disabled={isButtonDisabled()}
+        onClick={handleConfirmOrder}
         className="bg-[#1D1D1D] w-full text-lg py-3 rounded-full font-semibold disabled:bg-[#a7a7a7c0] disabled:text-[#525252]"
       >
         Confirm Order

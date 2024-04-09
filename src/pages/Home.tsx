@@ -9,27 +9,18 @@ import PopularDishes from "../components/PopularDishes/PopularDishes";
 import SearchInput from "../components/SearchInput";
 import { cartItems } from "../redux/features/cartSlice";
 import { BasicCountryInfo } from "../types/dishes";
-import dateFormatter from "../utils/dateFormatter";
+import currentDate from "../utils/currentDate";
 import Order from "./Order";
 import CheckOut from "../components/CheckOut";
 import { useAllCounries } from "../utils/useAllCountries";
 
 const Home = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
-  // const getCountries = async () => {
-  //   return await fetch("http://localhost:5000/all-countries").then((res) =>
-  //     res.json()
-  //   );
-  // };
+  const [isCheckoutActive, setIsCheckoutActive] = useState<boolean>(false);
 
   const cartToggle = () => {
     setIsActive(() => !isActive);
   };
-
-  // const { data, isLoading, isError } = useQuery<BasicCountryInfo[], Error>({
-  //   queryKey: ["countries"],
-  //   queryFn: getCountries,
-  // });
 
   const { data, isLoading, isError } = useAllCounries();
 
@@ -40,6 +31,7 @@ const Home = () => {
   };
 
   const cart = useSelector(cartItems);
+  console.log(cart);
 
   return (
     <div className=" w-[calc(100%-51px)]  md:w-[calc(100%-60px)] bg-[#1d1d1d] text-light h-screen overflow-y-scroll no-scrollbar justify-between p-6  flex ">
@@ -51,7 +43,7 @@ const Home = () => {
         <nav className="flex items-center justify-between ">
           <div>
             <h1 className="text-2xl font-bold">Pakecho Restaurant</h1>
-            <p className="text-secondary">{dateFormatter()}</p>
+            <p className="text-secondary">{currentDate()}</p>
           </div>
           <div className="flex w-[60%] items-center gap-x-4">
             <SearchInput
@@ -83,8 +75,11 @@ const Home = () => {
         </div>
       </div>
 
-      <Cart isActive={isActive} />
-      {/* <CheckOut/> */}
+      <Cart isActive={isActive} setIsCheckoutActive={setIsCheckoutActive} />
+      <CheckOut
+        isCheckoutActive={isCheckoutActive}
+        setIsCheckoutActive={setIsCheckoutActive}
+      />
     </div>
   );
 };

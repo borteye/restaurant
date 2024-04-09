@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { FetchProps } from "../types/forms";
 
-export const fetchData = async ({ url, method, body }: FetchProps) => {
+export const fetchData = async ({ url, method, body }: any) => {
   const result = await fetch(url, {
     headers: {
       "Content-Type": "application/json",

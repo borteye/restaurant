@@ -1,15 +1,10 @@
-import React from "react";
-
-const dateFormatter = () => {
-  const currentDate = new Date();
-
-  const month = currentDate.toLocaleString("default", { month: "long" });
-  const day = currentDate.getDate();
-  const year = currentDate.getFullYear();
-
-  const formattedDate = `${month} ${day}, ${year}`;
+const dateFormatter = (dateStr: string) => {
+  const formattedDate = new Date(dateStr).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "2-digit",
+  });
   return formattedDate;
 };
 
 export default dateFormatter;
-  

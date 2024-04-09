@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
+import { orderDetails } from "../types/orders";
 
-export const useAllCounries = () => {
-  const endpoint = "http://localhost:5000/all-countries";
-  const url = async (): Promise<any> => {
+export const useAllOrders = () => {
+  const endpoint = "http://localhost:5000/orders";
+  const url = async (): Promise<orderDetails> => {
     try {
       const res = await fetch(endpoint);
       if (!res.ok) {
@@ -13,8 +14,9 @@ export const useAllCounries = () => {
       throw new Error(`Error in fetch: ${error}`);
     }
   };
+
   return useQuery({
-    queryKey: ["countries"],
+    queryKey: ["orders"],
     queryFn: url,
   });
 };

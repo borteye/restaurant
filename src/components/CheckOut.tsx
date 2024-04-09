@@ -6,15 +6,22 @@ import { CheckOutInfo } from "../types/user";
 import { useSelector } from "react-redux";
 import { cartItems } from "../redux/features/cartSlice";
 import { selectId } from "../redux/features/userSlice";
-import dateFormatter from "../utils/dateFormatter";
+import dateFormatter from "../utils/currentDate";
+import { orderNumberGenerator } from "../utils/idGenerator";
+import { fetchData } from "../hooks/fetch";
 
-type Props = {};
+type Props = {
+  isCheckoutActive: boolean;
+  setIsCheckoutActive: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-const CheckOut = (props: Props) => {
+const CheckOut = ({ isCheckoutActive, setIsCheckoutActive }: Props) => {
   const userId = useSelector(selectId);
   const cart = useSelector(cartItems);
 
-
+  const handleCloseCheckOut = () => {
+    setIsCheckoutActive(false);
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -31,15 +38,24 @@ const CheckOut = (props: Props) => {
         const method = "POST";
         const address = `${values.postalCode},${values.streetName},${values.streetNumber},${values.city}`;
         const body = {
-
           userid: userId,
+          ordernumber: orderNumberGenerator(),
           customer: values.fullName,
+          status: "Complete",
+          orderdate: dateFormatter(),
           address: address,
-          orderdate: dateFormatter() ,
-          
-            cart: cart,
-
+          dishes: cart,
         };
+
+        const { result, success, error } = await fetchData({
+          url,
+          method,
+          body,
+        });
+
+        if (success) {
+          console.log(success, result);
+        }
       } catch (error) {}
     },
   });
@@ -48,12 +64,16 @@ const CheckOut = (props: Props) => {
     formik;
 
   return (
-    <div className="absolute inset-0 flex justify-center text-black items-center bg-[#00000065]">
+    <div
+      className={`absolute inset-0 ${
+        isCheckoutActive ? "flex" : "hidden"
+      } justify-center text-black items-center bg-[#00000065]`}
+    >
       <div className="bg-light py-6 px-8 w-[20%] flex flex-col gap-y-4 rounded-3xl ">
         <h1 className="text-2xl font-semibold">Check Out</h1>
         <div className="flex flex-col gap-y-8 ">
           <h1 className="font-semibold">Address</h1>
-          <form className="flex flex-col gap-y-4">
+          <form className="flex flex-col gap-y-4" onSubmit={handleSubmit}>
             <div>
               <label className="font-bold text-secondary">FULL NAME</label>
               <InputField
@@ -154,9 +174,20 @@ const CheckOut = (props: Props) => {
                 false
               )}
             </div>
-            <button className="bg-black text-light py-2 font-semibold">
-              Place Order
-            </button>
+            <div className="flex items-center justify-between">
+              <button
+                onClick={handleCloseCheckOut}
+                className="border border-black text-black w-[45%] py-2 font-semibold"
+              >
+                Back
+              </button>
+              <button
+                type="submit"
+                className="bg-black text-light py-2 font-semibold w-[45%]"
+              >
+                Place Order
+              </button>
+            </div>
           </form>
         </div>
       </div>
