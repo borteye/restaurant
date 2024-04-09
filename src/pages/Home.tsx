@@ -12,23 +12,26 @@ import { BasicCountryInfo } from "../types/dishes";
 import dateFormatter from "../utils/dateFormatter";
 import Order from "./Order";
 import CheckOut from "../components/CheckOut";
+import { useAllCounries } from "../utils/useAllCountries";
 
 const Home = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
-  const getCountries = async () => {
-    return await fetch("http://localhost:5000/all-countries").then((res) =>
-      res.json()
-    );
-  };
+  // const getCountries = async () => {
+  //   return await fetch("http://localhost:5000/all-countries").then((res) =>
+  //     res.json()
+  //   );
+  // };
 
   const cartToggle = () => {
     setIsActive(() => !isActive);
   };
 
-  const { data, isLoading, isError } = useQuery<BasicCountryInfo[], Error>({
-    queryKey: ["countries"],
-    queryFn: getCountries,
-  });
+  // const { data, isLoading, isError } = useQuery<BasicCountryInfo[], Error>({
+  //   queryKey: ["countries"],
+  //   queryFn: getCountries,
+  // });
+
+  const { data, isLoading, isError } = useAllCounries();
 
   const countries = {
     title: "Country",
@@ -81,7 +84,7 @@ const Home = () => {
       </div>
 
       <Cart isActive={isActive} />
-      <CheckOut/>
+      {/* <CheckOut/> */}
     </div>
   );
 };

@@ -110,13 +110,20 @@ interface CartCardProps {
   };
 }
 
+
 export {
   BasicCategoryInfo,
   BasicCountryInfo,
   BasicFoodInfo,
-  BasicPopularDishesInfo, CartCardProps, CartDetails, CartState, CategoryCardProps,
+  BasicPopularDishesInfo,
+  CartCardProps,
+  CartDetails,
+  CartState,
+  CategoryCardProps,
   CountryDetails,
-  DishDetails, Item, MenuFoodProps,
-  PopularDishesCardProps
-};
+  DishDetails,
+  Item,
+  MenuFoodProps,
+  PopularDishesCardProps,
 
+};

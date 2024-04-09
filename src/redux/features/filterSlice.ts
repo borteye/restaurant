@@ -16,6 +16,7 @@ export const filterSlice = createSlice({
     },
     SessionResetFilter: (state) => {
       state.country = null;
+      state.countryid = null;
     },
   },
 });
