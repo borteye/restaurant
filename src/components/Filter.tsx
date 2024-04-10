@@ -4,7 +4,7 @@ import { UseDispatch, useDispatch, useSelector } from "react-redux";
 import { ActiveFilter } from "../redux/features/filterSlice";
 import { useMutation } from "@tanstack/react-query";
 import { DishCatalog } from "../redux/features/dishSlice";
-import { useCountryDishes } from "../utils/useCountryDishes";
+import { useCountryDishes } from "../hooks/useCountryDishes";
 
 type Props = {
   filterBy: {
@@ -33,9 +33,6 @@ const Filter: FC<Props> = ({ filterBy, width, borderColor, position }) => {
     setIsFilterVisible(!isFilterVisible);
   };
 
-
-
-
   const onSuccess = (data: any) => {
     dispatch(DishCatalog(data));
   };
@@ -44,7 +41,7 @@ const Filter: FC<Props> = ({ filterBy, width, borderColor, position }) => {
     console.log(error);
   };
 
-  const {mutate} = useCountryDishes(onSuccess, onError)
+  const { mutate } = useCountryDishes(onSuccess, onError);
 
   const handleSelect = (name: string, countryid: number) => {
     setSelect(name);

@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import burger from "../assets/burger.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectRole } from "../redux/features/userSlice";
-import { useAllOrders } from "../utils/useAllOrders";
+import { useAllOrders } from "../hooks/useAllOrders";
 import dateFormatter from "../utils/dateFormatter";
 import { Item } from "../types/dishes";
+import totalPrice from "../utils/totalPrice";
+import {
+  ActiveOrderHistory,
+  selectedOrder,
+} from "../redux/features/orderSlice";
 
 type Props = {
   homePath: string;
@@ -12,22 +17,22 @@ type Props = {
 };
 
 const Table = ({ homePath = "/home", orderPath = "/orders" }) => {
-  const [showOrderDetails, setShowOrderDetails] = useState<boolean>(true);
-  const [orderid, setOrderId] = useState<number>();
+  const [showOrderDetails, setShowOrderDetails] = useState<boolean>(false);
+  const [orderId, setOrderId] = useState<number>();
   const { pathname } = window.location;
-  const role = useSelector(selectRole);
+  const dispatch = useDispatch();
+  const orderDetails = useSelector(selectedOrder);
+  const total = totalPrice(orderDetails);
+
+  // const role = useSelector(selectRole);
 
   const { data, isLoading, isError } = useAllOrders();
   const result = data?.result;
 
-  console.log(result);
-
-  const orderDetail = result?.filter((order) => order?.orderid === orderid);
-  const tt: Item[] | any[] | undefined | 0 =
-    orderDetail?.length &&
-    orderDetail[0]?.dishes?.map((dishString: any) => JSON.parse(dishString));
-  console.log(tt, "hello");
-  console.log("Halo");
+  const handleSelectOrder = (orderDishes: Item[], orderid: number) => {
+    setShowOrderDetails(orderId === orderid ? !showOrderDetails : true);
+    dispatch(ActiveOrderHistory(orderDishes));
+  };
 
   return (
     <>
@@ -78,7 +83,10 @@ const Table = ({ homePath = "/home", orderPath = "/orders" }) => {
               result?.map((orders) => {
                 return (
                   <div
-                    onClick={() => setOrderId(orders?.orderid)}
+                    onClick={() => {
+                      setOrderId(orders?.orderid);
+                      handleSelectOrder(orders?.dishes, orders?.orderid);
+                    }}
                     className="flex items-center gap-x-6 pr-8 cursor-pointer hover:bg-[#F4F7F9] py-6 min-w-fit border-b justify-between"
                   >
                     <p className="flex min-w-[15rem] items-center gap-x-2 font-semibold ">
@@ -96,40 +104,41 @@ const Table = ({ homePath = "/home", orderPath = "/orders" }) => {
                 );
               })
             ) : (
-              <p>No order available</p>
+              <p className="text-center mt-12 text-2xl">No orders available</p>
             )}
           </div>
 
           <div
             className={`w-[30%] ${
               showOrderDetails ? "flex" : "hidden"
-            } flex-col gap-y-10 p-6 bg-[#F4F7F9]`}
+            } flex-col gap-y-10 p-6 bg-[#F4F7F9] h-fit `}
           >
             <h1 className="text-2xl font-semibold">Detail Order</h1>
             <ul className="flex gap-x-6 border-b font-semibold">
               <li className="border-green-900 border-b-2 py-4">Items</li>
               <li className="py-4">Review</li>
             </ul>
-
-            {Array.isArray(tt) &&
-              tt?.map((dishes: Item) => {
-                return (
-                  <div className="mt-10 flex justify-between items-center">
-                    <div className="flex items-center gap-x-6">
-                      <img src={burger} alt="" className="w-16" />
-                      <div>
-                        <p className="text-black">{dishes?.name}</p>
-                        <p className="text-sm text-secondary">${dishes?.price}</p>
-                      </div>
+            {orderDetails?.map((dish) => {
+              return (
+                <div
+                  className="mt-10 flex justify-between items-center"
+                  key={dish?.dishid}
+                >
+                  <div className="flex items-center gap-x-6">
+                    <img src={burger} alt="" className="w-16" />
+                    <div>
+                      <p className="text-black">{dish?.name}</p>
+                      <p className="text-sm text-secondary">${dish?.price}</p>
                     </div>
-                    <p>{dishes?.quantity} items</p>
                   </div>
-                );
-              })}
+                  <p>{dish?.quantity}items</p>
+                </div>
+              );
+            })}
 
             <div className="flex justify-between items-center">
               <p className="text-2xl font-semibold">Total</p>
-              <p>$40.98</p>
+              <p>${total?.toFixed(2)}</p>
             </div>
           </div>
         </div>

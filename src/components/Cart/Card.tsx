@@ -1,14 +1,17 @@
-import React, { FC } from "react";
-import burger from "../../assets/burger.png";
-import { MinusCircleIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
-import { TrashIcon } from "@heroicons/react/24/outline";
-import { CartCardProps } from "../../types/dishes";
+import {
+  MinusCircleIcon,
+  PlusCircleIcon,
+  TrashIcon,
+} from "@heroicons/react/24/outline";
+import { FC } from "react";
 import { useDispatch } from "react-redux";
+import burger from "../../assets/burger.png";
 import {
   decreaseQuantity,
   increaseQuantity,
   removeFromCart,
 } from "../../redux/features/cartSlice";
+import { CartCardProps } from "../../types/dishes";
 
 const Card: FC<CartCardProps> = ({ dish }) => {
   const dispatch = useDispatch();

@@ -1,3 +1,5 @@
+import { Item } from "./dishes";
+
 interface orderDetails {
   result: {
     userid: number;
@@ -34,4 +36,10 @@ interface orderItems {
   }[];
 }
 
-export { orderDetails };
+interface OrderHistoryDishes {
+  order: {
+    dishes: Item[];
+  };
+}
+
+export { orderDetails, OrderHistoryDishes };

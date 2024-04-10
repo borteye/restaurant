@@ -44,10 +44,10 @@ type BasicCategoryInfo = {
 };
 
 interface CategoryCardProps {
-  data?: {
+  item?: {
     name: string;
     categoryid: number;
-  }[];
+  };
 }
 
 type BasicCountryInfo = {
@@ -109,6 +109,7 @@ interface CartCardProps {
     totalPrice: number;
   };
 }
+
 
 
 export {

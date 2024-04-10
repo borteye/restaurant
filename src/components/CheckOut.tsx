@@ -36,7 +36,7 @@ const CheckOut = ({ isCheckoutActive, setIsCheckoutActive }: Props) => {
       try {
         const url = "http://localhost:5000/place-order";
         const method = "POST";
-        const address = `${values.postalCode},${values.streetName},${values.streetNumber},${values.city}`;
+        const address = `${values.postalCode}, ${values.streetName}, ${values.streetNumber}, ${values.city}`;
         const body = {
           userid: userId,
           ordernumber: orderNumberGenerator(),
@@ -54,7 +54,8 @@ const CheckOut = ({ isCheckoutActive, setIsCheckoutActive }: Props) => {
         });
 
         if (success) {
-          console.log(success, result);
+          console.log(success);
+          setIsCheckoutActive(false);
         }
       } catch (error) {}
     },
@@ -176,6 +177,7 @@ const CheckOut = ({ isCheckoutActive, setIsCheckoutActive }: Props) => {
             </div>
             <div className="flex items-center justify-between">
               <button
+                type="button"
                 onClick={handleCloseCheckOut}
                 className="border border-black text-black w-[45%] py-2 font-semibold"
               >

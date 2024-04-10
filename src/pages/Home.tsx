@@ -12,7 +12,7 @@ import { BasicCountryInfo } from "../types/dishes";
 import currentDate from "../utils/currentDate";
 import Order from "./Order";
 import CheckOut from "../components/CheckOut";
-import { useAllCounries } from "../utils/useAllCountries";
+import { useAllCounries } from "../hooks/useAllCountries";
 
 const Home = () => {
   const [isActive, setIsActive] = useState<boolean>(false);

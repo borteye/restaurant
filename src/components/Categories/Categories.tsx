@@ -1,9 +1,7 @@
-import React from "react";
-
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
-import Card from "./Card";
 import { useQuery } from "@tanstack/react-query";
 import { BasicCategoryInfo } from "../../types/dishes";
+import Card from "./Card";
 
 type Props = {};
 
@@ -28,7 +26,11 @@ const Categories = (props: Props) => {
         </div>
       </div>
       <div className="flex gap-x-8 overflow-x-scroll no-scrollbar">
-        <Card data={data} />
+        <div className="flex gap-x-16  justify-center items-center">
+          {data?.map((item) => {
+            return <Card item={item} />;
+          })}
+        </div>
       </div>
     </section>
   );

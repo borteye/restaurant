@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { MapPinIcon } from "@heroicons/react/24/solid";
-import { ClockIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
-import Card from "./Card";
-import { useDispatch, useSelector } from "react-redux";
+import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import React from "react";
+import { useSelector } from "react-redux";
 import { cartItems } from "../../redux/features/cartSlice";
-import { orderNumberGenerator } from "../../utils/idGenerator";
-import { selectId } from "../../redux/features/userSlice";
+import totalPrice from "../../utils/totalPrice";
+import Card from "./Card";
 
 type Props = {
   isActive: boolean;
@@ -14,10 +12,7 @@ type Props = {
 
 const Cart = ({ isActive, setIsCheckoutActive }: Props) => {
   const cart = useSelector(cartItems);
-
-  const total = cart?.reduce((total, dish) => {
-    return total + dish?.totalPrice;
-  }, 0);
+  const total = totalPrice(cart);
 
   const isButtonDisabled = () => {
     if (cart?.length) {

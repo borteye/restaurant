@@ -14,6 +14,7 @@ import userReducer from "./features/userSlice";
 import dishReducer from "./features/dishSlice";
 import filterReducer from "./features/filterSlice";
 import cartReducer from "./features/cartSlice";
+import orderReducer from "./features/orderSlice";
 
 
 const rootReducer = combineReducers({
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   dish: dishReducer,
   filter: filterReducer,
   cart: cartReducer,
+  order: orderReducer
 });
 
 const persistConfig = {
