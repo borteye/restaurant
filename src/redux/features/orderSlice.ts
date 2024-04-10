@@ -11,7 +11,6 @@ export const orderSlice = createSlice({
   reducers: {
     ActiveOrderHistory: (state, { payload }) => {
       const orderDetails = payload.map((items: any) => JSON.parse(items));
-      console.log(orderDetails);
       state.dishes = orderDetails;
     },
     LogoutLever: (state) => {},
@@ -20,6 +19,6 @@ export const orderSlice = createSlice({
 
 export const { ActiveOrderHistory, LogoutLever } = orderSlice.actions;
 
-export const selectedOrder = ({ order }: OrderHistoryDishes) => order.dishes ;
+export const selectedOrder = ({ order }: OrderHistoryDishes) => order.dishes;
 
 export default orderSlice.reducer;

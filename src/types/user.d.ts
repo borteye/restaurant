@@ -17,4 +17,13 @@ type CheckOutInfo = {
   city: string;
 };
 
-export { UserDetails, CheckOutInfo };
+type BasicCustomerDetails = {
+  id: number;
+  email: string;
+  username: string;
+  password: string;
+  role: string;
+  status: string
+};
+
+export { UserDetails, CheckOutInfo, BasicCustomerDetails };

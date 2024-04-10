@@ -15,11 +15,8 @@ const Cart = ({ isActive, setIsCheckoutActive }: Props) => {
   const total = totalPrice(cart);
 
   const isButtonDisabled = () => {
-    if (cart?.length) {
-      return false;
-    } else {
-      return true;
-    }
+    const checkDisable = cart?.length ? false : true;
+    return checkDisable;
   };
 
   const handleConfirmOrder = () => {

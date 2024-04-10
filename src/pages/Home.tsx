@@ -31,7 +31,6 @@ const Home = () => {
   };
 
   const cart = useSelector(cartItems);
-  console.log(cart);
 
   return (
     <div className=" w-[calc(100%-51px)]  md:w-[calc(100%-60px)] bg-[#1d1d1d] text-light h-screen overflow-y-scroll no-scrollbar justify-between p-6  flex ">

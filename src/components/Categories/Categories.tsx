@@ -28,7 +28,7 @@ const Categories = (props: Props) => {
       <div className="flex gap-x-8 overflow-x-scroll no-scrollbar">
         <div className="flex gap-x-16  justify-center items-center">
           {data?.map((item) => {
-            return <Card item={item} />;
+            return <Card item={item} key={item?.categoryid} />;
           })}
         </div>
       </div>

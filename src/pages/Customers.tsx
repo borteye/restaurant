@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import burger from "../assets/burger.png";
 import SearchInput from "../components/SearchInput";
 import OrderCard from "../components/OrderCard";
@@ -10,10 +10,41 @@ import {
   PencilSquareIcon,
   TrashIcon,
 } from "@heroicons/react/24/solid";
+import { useAllCustomers } from "../hooks/useAllCustomers";
+import { useDeleteCustomer } from "../hooks/useDeleteCustomer";
 type Props = {};
 
 const Customers = (props: Props) => {
-  const role = useSelector(selectRole);
+  const [options, setOptions] = useState<boolean>(false);
+  const [customerId, setCustomerId] = useState<number>();
+
+  const handleToggle = (customerId: number) => {
+    setOptions(customerId === customerId ? !options : true);
+  };
+
+  const { data, isLoading, isError } = useAllCustomers();
+
+  const onSuccess = (data: any) => {
+    const {success, error} = data;
+    alert(error)
+  };
+
+  const onError = (error: any) => {
+    console.log(error);
+  };
+
+  const { mutate } = useDeleteCustomer(
+    onSuccess,
+    onError,
+    customerId as number
+  );
+
+  const handleDeleteCustomer = (id: number) => {
+    setCustomerId(id);
+    mutate({ id });
+    setOptions(false);
+  };
+
   return (
     <div className="flex flex-col w-[calc(100%-51px)] md:w-[calc(100%-60px)] p-6 gap-y-16">
       <div className="flex flex-col gap-y-16">
@@ -41,34 +72,53 @@ const Customers = (props: Props) => {
           <p className="min-w-[15rem] ">Email</p>
           <p className="min-w-[15rem] ">Phone number</p>
           <p className="min-w-[9rem] ">Gender</p>
+          <p className="min-w-[9rem] ">Status</p>
           <p className="w-7"></p>
         </div>
 
         <div className="flex flex-col gap-y-2 py-2 px-1 ">
-          <div className="relative  flex items-center gap-x-6 pr-8 px-8 cursor-pointer rounded-xl bg-[#F4F7F9] hover:bg-[#FFF] py-6 min-w-fit shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] justify-between">
-            <p className="flex min-w-[15rem] items-center gap-x-2 font-semibold ">
-              <img src={burger} alt="" className="w-10" />
-              Gabriel Borteye
-            </p>
-            <p className="min-w-[15rem] ">Address</p>
-            <p className="min-w-[15rem] ">24/04/2024</p>
-            <p className="min-w-[9rem] bg-red-500 text-center rounded-2xl   ">
-              Male
-            </p>
-            <p>
-              <EllipsisHorizontalIcon className="w-7" />
-            </p>
-            <div className="bg-light border p-2 z-50 absolute right-0 top-14 rounded-xl">
-              <div className="flex items-center gap-x-2 py-2 px-4 border rounded-lg border-red-500">
-                <PencilSquareIcon className="w-5" />
-                <p>Edit</p>
+          {data?.map((customer) => {
+            return (
+              <div
+                key={customer?.id}
+                className="relative  flex items-center gap-x-6 pr-8 px-8 cursor-pointer rounded-xl bg-[#F4F7F9] hover:bg-[#FFF] py-6 min-w-fit shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] justify-between"
+              >
+                <p className="flex min-w-[15rem] items-center gap-x-2 font-semibold ">
+                  <img src={burger} alt="" className="w-10" />
+                  {customer?.username}
+                </p>
+                <p className="min-w-[15rem] ">{customer?.email}</p>
+                <p className="min-w-[15rem] ">24/04/2024</p>
+                <p className="min-w-[9rem]">Male</p>
+                <p className="min-w-[9rem]  bg-green-200 text-green-700 text-center rounded-2xl ">
+                  {customer?.status}
+                </p>
+                <p>
+                  <EllipsisHorizontalIcon
+                    onClick={() => handleToggle(customer?.id)}
+                    className="w-7"
+                  />
+                </p>
+                <div
+                  className={`${
+                    options ? "block" : "hidden"
+                  } bg-light border p-2 z-50 absolute right-0 top-14 rounded-xl`}
+                >
+                  <div className="flex items-center gap-x-2 py-2 px-4 border rounded-lg border-red-500">
+                    <PencilSquareIcon className="w-5" />
+                    <p>Edit</p>
+                  </div>
+                  <div
+                    onClick={() => handleDeleteCustomer(customer?.id)}
+                    className="flex items-center gap-x-2 py-2 rounded-lg px-4"
+                  >
+                    <TrashIcon className="w-5" />
+                    <p>Delete</p>
+                  </div>
+                </div>
               </div>
-              <div className="flex items-center gap-x-2 py-2 rounded-lg px-4">
-                <TrashIcon className="w-5" />
-                <p>Delete</p>
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
     </div>

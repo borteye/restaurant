@@ -80,14 +80,17 @@ const Table = ({ homePath = "/home", orderPath = "/orders" }) => {
               <p className="min-w-[9rem] ">Status</p>
             </div>
             {result?.length ? (
-              result?.map((orders) => {
+              result?.map((orders, i) => {
                 return (
                   <div
                     onClick={() => {
                       setOrderId(orders?.orderid);
                       handleSelectOrder(orders?.dishes, orders?.orderid);
                     }}
-                    className="flex items-center gap-x-6 pr-8 cursor-pointer hover:bg-[#F4F7F9] py-6 min-w-fit border-b justify-between"
+                    key={i}
+                    className={` ${
+                      orderId === orders?.orderid && "bg-[#F4F7F9]"
+                    } flex items-center gap-x-6 pr-8 cursor-pointer hover:bg-[#F4F7F9] py-6 min-w-fit border-b justify-between`}
                   >
                     <p className="flex min-w-[15rem] items-center gap-x-2 font-semibold ">
                       <img src={burger} alt="" className="w-10" />

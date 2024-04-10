@@ -46,8 +46,8 @@ const Login = () => {
           method,
           body,
         });
-
         if (success) {
+          console.log(success);
           disptach(
             ActiveGate({
               id: result.id,
@@ -60,7 +60,7 @@ const Login = () => {
           navigate("/home");
         } else if (error) {
           console.error(error);
-          navigate("/signup");
+          // navigate("/signup");
         }
       } catch (error) {
         console.error(error);
