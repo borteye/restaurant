@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 import { selectRole } from "../redux/features/userSlice";
 import { roles } from "../roles";
 import OrderCard from "../components/OrderCard";
+import { useOrders } from "../hooks/useAllOrders";
 
 type Props = {
   homePath: string;
@@ -25,6 +26,9 @@ type Props = {
 const Order = ({ homePath = "/home", orderPath = "/orders" }) => {
   const { pathname } = window.location;
   const role = useSelector(selectRole);
+
+  const OrdersResponse = useOrders()?.data;
+  const OrdersData = OrdersResponse?.result;
 
   const filterBy = {
     title: "By Status",
@@ -47,6 +51,45 @@ const Order = ({ homePath = "/home", orderPath = "/orders" }) => {
       { name: "All", quantity: 1, optionId: 4 },
     ],
   };
+
+  const adminColumns = [
+    {
+      field: "customer",
+      header: "Customer",
+    },
+    {
+      field: "address",
+      header: "Address",
+    },
+    {
+      field: "orderdate",
+      header: "Ordered Date",
+    },
+    {
+      field: "status",
+      header: "Status",
+    },
+  ];
+
+  const customerColumns = [
+    {
+      field: "ordernumber",
+      header: "Order #",
+    },
+    {
+      field: "orderdate",
+      header: "Ordered Date",
+    },
+    {
+      field: "address",
+      header: "Address",
+    },
+    {
+      field: "status",
+      header: "Status",
+    },
+  ];
+
   return (
     <section
       className={`flex flex-col ${
@@ -71,7 +114,6 @@ const Order = ({ homePath = "/home", orderPath = "/orders" }) => {
           {role === roles.admin && (
             <div className="flex justify-between ">
               <OrderCard />
-              
             </div>
           )}
 
@@ -95,7 +137,10 @@ const Order = ({ homePath = "/home", orderPath = "/orders" }) => {
         false
       )}
 
-      <Table />
+      <Table
+        data={OrdersData}
+        columns={role === roles?.admin ? adminColumns : customerColumns}
+      />
     </section>
   );
 };

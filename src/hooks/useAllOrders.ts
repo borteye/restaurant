@@ -1,8 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
+import { useSelector } from "react-redux";
+import { selectId, selectRole } from "../redux/features/userSlice";
 import { orderDetails } from "../types/orders";
 
-export const useAllOrders = () => {
-  const endpoint = "http://localhost:5000/orders";
+export const useOrders = () => {
+  const userId = useSelector(selectId);
+  const userRole = useSelector(selectRole);
+  const endpoint = `http://localhost:5000/orders/${userRole}/${userId}`;
   const url = async (): Promise<orderDetails> => {
     try {
       const res = await fetch(endpoint);
@@ -14,7 +18,6 @@ export const useAllOrders = () => {
       throw new Error(`Error in fetch: ${error}`);
     }
   };
-
   return useQuery({
     queryKey: ["orders"],
     queryFn: url,

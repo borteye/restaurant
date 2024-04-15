@@ -13,6 +13,7 @@ import currentDate from "../utils/currentDate";
 import Order from "./Order";
 import CheckOut from "../components/CheckOut";
 import { useAllCounries } from "../hooks/useAllCountries";
+import Table from "../components/Table";
 
 const Home = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -70,7 +71,7 @@ const Home = () => {
           />
           <Categories />
           <PopularDishes />
-          <Order />
+          <Table  />
         </div>
       </div>
 
