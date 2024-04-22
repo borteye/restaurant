@@ -3,8 +3,8 @@ import InputField from "./InputField";
 import { useFormik } from "formik";
 import { checkOutSchema } from "../schemas/CheckOutSchema";
 import { CheckOutInfo } from "../types/user";
-import { useSelector } from "react-redux";
-import { cartItems } from "../redux/features/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { cartItems, defaultCart } from "../redux/features/cartSlice";
 import { selectId } from "../redux/features/userSlice";
 import dateFormatter from "../utils/currentDate";
 import { orderNumberGenerator } from "../utils/idGenerator";
@@ -18,6 +18,8 @@ type Props = {
 const CheckOut = ({ isCheckoutActive, setIsCheckoutActive }: Props) => {
   const userId = useSelector(selectId);
   const cart = useSelector(cartItems);
+
+  const dispatch = useDispatch();
 
   const handleCloseCheckOut = () => {
     setIsCheckoutActive(false);
@@ -47,14 +49,14 @@ const CheckOut = ({ isCheckoutActive, setIsCheckoutActive }: Props) => {
           dishes: cart,
         };
 
-        const { result, success, error } = await fetchData({
+        const { success, error } = await fetchData({
           url,
           method,
           body,
         });
 
         if (success) {
-          console.log(success);
+          dispatch(defaultCart());
           setIsCheckoutActive(false);
         }
       } catch (error) {}

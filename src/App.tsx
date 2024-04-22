@@ -15,6 +15,7 @@ import { selectRole } from "./redux/features/userSlice";
 import { roles } from "./roles";
 import Order from "./pages/Order";
 import Customers from "./pages/Customers";
+import AddDish from "./pages/AddDish";
 
 function App() {
   const role = useSelector(selectRole);
@@ -33,6 +34,7 @@ function App() {
                 <Route path="/home" element={<Home />} />
                 <Route path="/orders" element={<Order />} />
                 <Route path="/customers-list" element={<Customers />} />
+                <Route path="/add-dish" element={<AddDish />} />
               </Route>
             </Route>
           ) : role && role === roles.customer ? (

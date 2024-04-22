@@ -7,10 +7,11 @@ import Card from "./Card";
 
 type Props = {
   isActive: boolean;
+  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
   setIsCheckoutActive: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Cart = ({ isActive, setIsCheckoutActive }: Props) => {
+const Cart = ({ isActive, setIsActive, setIsCheckoutActive }: Props) => {
   const cart = useSelector(cartItems);
   const total = totalPrice(cart);
 
@@ -20,6 +21,7 @@ const Cart = ({ isActive, setIsCheckoutActive }: Props) => {
   };
 
   const handleConfirmOrder = () => {
+    setIsActive(false);
     setIsCheckoutActive(true);
   };
 

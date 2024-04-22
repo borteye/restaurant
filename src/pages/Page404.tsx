@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 const Page404 = () => {
   const [file, setFile] = useState<File | null>(null);
- 
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
@@ -15,6 +14,7 @@ const Page404 = () => {
     formData.append("file", file);
 
     try {
+      console.log(formData);
       const response = await fetch("http://localhost:5000/upload", {
         method: "POST",
         body: formData,

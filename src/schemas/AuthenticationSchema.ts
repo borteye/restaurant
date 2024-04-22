@@ -26,7 +26,6 @@ export const authLoginSchema = yup.object().shape({
   username: yup.string().max(15, "too long").required("Required"),
   password: yup
     .string()
-    .min(8)
-    .matches(passwordValidRegex, { message: "Please create a strong password" })
+    .min(8, "Password must be a minimum of 8 characters")
     .required("Required"),
 });

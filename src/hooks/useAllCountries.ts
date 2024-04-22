@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-export const useAllCounries = () => {
+export const useAllCountries = () => {
   const endpoint = "http://localhost:5000/all-countries";
   const url = async (): Promise<any> => {
     try {

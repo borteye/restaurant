@@ -4,17 +4,15 @@ import { selectCountry, selectCountryId } from "../redux/features/filterSlice";
 import { BasicCountryInfo } from "../types/dishes";
 
 export const useCountryDishes = (onSuccess: any, onError: any) => {
-  const name = useSelector(selectCountry);
   const countryid = useSelector(selectCountryId);
 
-  const endpoint = `http://localhost:5000/dishes/:${name}/:${countryid}`;
+  const endpoint = `http://localhost:5000/dishes/${countryid}`;
 
   const url = async (body: BasicCountryInfo): Promise<any> => {
     try {
       const res = await fetch(endpoint, {
-        method: "POST",
+        method: "GET",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
       });
 
       if (!res.ok) {

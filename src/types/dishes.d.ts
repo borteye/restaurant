@@ -35,6 +35,7 @@ interface PopularDishesCardProps {
     available: number;
     countryid: number;
     categoryid: number;
+    imageurl: string
   };
 }
 
@@ -72,7 +73,10 @@ interface DishDetails {
       available: number;
       categoryid: number;
       countryid: number;
+      imageurl: string
     }[];
+    categories: BasicCategoryInfo[];
+    countries: BasicCountryInfo[];
   };
 }
 
@@ -84,6 +88,7 @@ interface CartDetails {
       quantity: number;
       price: number;
       totalPrice: number;
+      imageurl: string
     }[];
   };
 }
@@ -107,10 +112,9 @@ interface CartCardProps {
     quantity: number;
     price: number;
     totalPrice: number;
+    imageurl: string
   };
 }
-
-
 
 export {
   BasicCategoryInfo,
@@ -126,5 +130,4 @@ export {
   Item,
   MenuFoodProps,
   PopularDishesCardProps,
-
 };

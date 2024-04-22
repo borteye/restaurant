@@ -6,6 +6,7 @@ export const fetchData = async ({ url, method, body }: any) => {
     headers: {
       "Content-Type": "application/json",
     },
+
     method: method,
     body: JSON.stringify(body),
   })

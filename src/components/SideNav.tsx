@@ -16,6 +16,7 @@ import { UseSelector, useSelector } from "react-redux";
 import { roles } from "../roles";
 import path from "path";
 import { useNavigate } from "react-router-dom";
+import { SquaresPlusIcon } from "@heroicons/react/24/outline";
 
 type Props = {};
 
@@ -54,6 +55,11 @@ const SideNav = (props: Props) => {
       icon: <GiftIcon className="w-5 sm:w-7" />,
       name: "Promos",
       pathname: "/admin",
+    },
+    {
+      icon: <SquaresPlusIcon className="w-5 sm:w-7" />,
+      name: "AddDish",
+      pathname: "/add-dish",
     },
     {
       icon: <AdjustmentsVerticalIcon className="w-5 sm:w-7" />,
@@ -100,6 +106,7 @@ const SideNav = (props: Props) => {
               onClick={() => navigator(navs.pathname)}
             >
               {navs.icon}
+
               <p className="absolute  w-auto left-14 shadow-md z-[1000px] rounded-lg bg-count font-bold group-hover:scale-100 text-center transition-all duration-100 py-1 px-2 scale-0  origin-left">
                 {navs.name}
               </p>

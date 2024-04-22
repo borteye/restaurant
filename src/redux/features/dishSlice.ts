@@ -3,7 +3,8 @@ import { DishDetails } from "../../types/dishes";
 
 const initialState = {
   dishes: [],
-  dish: null,
+  categories: [],
+  countries: [],
 };
 
 export const dishSlice = createSlice({
@@ -11,17 +12,28 @@ export const dishSlice = createSlice({
   initialState,
   reducers: {
     DishCatalog: (state, { payload }) => {
-      state.dishes = payload;
+      state.dishes = payload.dishes;
+      console.log(payload.dishes);
     },
-    
+    CategoryCatalog: (state, { payload }) => {
+      state.categories = payload.categories;
+      console.log(payload.categories);
+    },
+    CountryCatalog: (state, { payload }) => {
+      state.countries = payload.countries;
+      console.log(payload.countries);
+    },
+
     LogoutLever: (state) => {},
   },
 });
 
-export const { DishCatalog, LogoutLever } =
+export const { DishCatalog, CategoryCatalog, CountryCatalog, LogoutLever } =
   dishSlice.actions;
 
 // export const countryDishes = (state: DishDetails) => state.
-export const dishes = ({dish}: DishDetails) => dish.dishes;
+export const selectDishes = ({ dish }: DishDetails) => dish.dishes;
+export const selectCategories = ({ dish }: DishDetails) => dish.categories;
+export const selectCountries = ({ dish }: DishDetails) => dish.countries;
 
 export default dishSlice.reducer;

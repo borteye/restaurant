@@ -9,13 +9,13 @@ import {
   selectCountryId,
 } from "../../redux/features/filterSlice";
 import { BasicPopularDishesInfo, DishDetails } from "../../types/dishes";
-import { DishCatalog, dishes } from "../../redux/features/dishSlice";
+import { DishCatalog, selectDishes } from "../../redux/features/dishSlice";
 
 type Props = {};
 
 const PopularDishes = (props: Props) => {
   const dispatch = useDispatch();
-  const dishCatalog = useSelector(dishes);
+  const dishCatalog = useSelector(selectDishes);
   const getDishes = () => {
     return fetch(`http://localhost:5000/all-dishes`).then((res) => res.json());
   };
@@ -27,7 +27,11 @@ const PopularDishes = (props: Props) => {
 
   useEffect(() => {
     if (data) {
-      dispatch(DishCatalog(data));
+      dispatch(
+        DishCatalog({
+          dishes: data,
+        })
+      );
     }
   }, [data, dispatch]);
 
@@ -43,7 +47,7 @@ const PopularDishes = (props: Props) => {
         </div>
       </div>
       <div className="flex gap-x-8 overflow-x-scroll no-scrollbar">
-        {dishCatalog.length ? (
+        {dishCatalog?.length ? (
           dishCatalog?.map((dish, i: number) => {
             return <Card dish={dish} key={i} />;
           })

@@ -2,10 +2,14 @@ import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { useQuery } from "@tanstack/react-query";
 import { BasicCategoryInfo } from "../../types/dishes";
 import Card from "./Card";
+import { DishCatalog, CategoryCatalog } from "../../redux/features/dishSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 type Props = {};
 
 const Categories = (props: Props) => {
+  const dispatch = useDispatch();
   const getCategories = () => {
     return fetch("http://localhost:5000/categories").then((res) => res.json());
   };
@@ -13,6 +17,16 @@ const Categories = (props: Props) => {
     queryKey: ["categories"],
     queryFn: getCategories,
   });
+
+  useEffect(() => {
+    if (data) {
+      dispatch(
+        CategoryCatalog({
+          categories: data,
+        })
+      );
+    }
+  }, [data, dispatch]);
 
   return (
     <section className="flex flex-col gap-y-8">

@@ -49,4 +49,32 @@ interface FetchProps {
   };
 }
 
-export { TextFieldProps, LoginValues, SignUpValues, FetchProps };
+interface SelectOptionProps {
+  value?: string | number;
+  name?: string;
+  handleBlur?: FocusEventHandler<HTMLInputElement> | undefined;
+  handleChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  filterBy: {
+    title?: string;
+    icon?: JSX.Element;
+    options?: {
+      name: string;
+      quantity?: number;
+      countryid?: number;
+      categoryid?: number;
+      optionId?: number;
+    }[];
+  };
+  width?: string;
+  bgColor?: string;
+  homePath?: string;
+  addDishPath?: string;
+}
+
+export {
+  TextFieldProps,
+  LoginValues,
+  SignUpValues,
+  FetchProps,
+  SelectOptionProps,
+};

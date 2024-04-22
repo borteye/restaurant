@@ -32,7 +32,7 @@ const Card: FC<CartCardProps> = ({ dish }) => {
   };
   return (
     <div className="flex items-center justify-between w-full ">
-      <img src={burger} alt="cart image" className="w-16" />
+      <img src={dish?.imageurl} alt="cart image" className="w-16" />
       <div className="flex items-center justify-between w-[75%] border-b pb-5 ">
         <div className="flex flex-col gap-y-2 ">
           <h1 className="font-semibold">{dish?.name}</h1>

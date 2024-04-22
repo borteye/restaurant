@@ -11,7 +11,7 @@ import {
 } from "@heroicons/react/24/outline";
 import SearchInput from "../components/SearchInput";
 import { ChevronDownIcon, StarIcon } from "@heroicons/react/24/solid";
-import Filter from "../components/Filter";
+import Filter from "../components/CustomSelect";
 import { useSelector } from "react-redux";
 import { selectRole } from "../redux/features/userSlice";
 import { roles } from "../roles";
