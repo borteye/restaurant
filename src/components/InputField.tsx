@@ -29,6 +29,8 @@ const InputField: FC<TextFieldProps> = ({
   touchedPostalCode,
   cityError,
   touchedCity,
+  phoneNumberError,
+  touchedPhoneNumber
 }) => {
   return (
     <>

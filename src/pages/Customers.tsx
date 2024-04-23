@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import burger from "../assets/burger.png";
 import SearchInput from "../components/SearchInput";
-import OrderCard from "../components/OrderCard";
+import OrderCard from "../components/InfoCard";
 import { useSelector } from "react-redux";
 import { selectRole } from "../redux/features/userSlice";
 import { roles } from "../roles";
@@ -12,21 +12,32 @@ import {
 } from "@heroicons/react/24/solid";
 import { useAllCustomers } from "../hooks/useAllCustomers";
 import { useDeleteCustomer } from "../hooks/useDeleteCustomer";
+import InfoCard from "../components/InfoCard";
+import { useCustomerStatistics } from "../hooks/useCustomerStatistics";
 type Props = {};
 
-const Customers = (props: Props) => {
+const Customers = () => {
   const [options, setOptions] = useState<boolean>(false);
   const [customerId, setCustomerId] = useState<number>();
+
+  const userRole = useSelector(selectRole);
 
   const handleToggle = (customerId: number) => {
     setOptions(customerId === customerId ? !options : true);
   };
 
-  const { data, isLoading, isError } = useAllCustomers();
+  const {
+    data: allCustomersData,
+    isLoading: allCustomersLoading,
+    isError: allCustomersError,
+  } = useAllCustomers();
+
+  const { data: customerStatisticsData } = useCustomerStatistics();
+  console.log(customerStatisticsData);
 
   const onSuccess = (data: any) => {
-    const {success, error} = data;
-    alert(error)
+    const { success, error } = data;
+    alert(error);
   };
 
   const onError = (error: any) => {
@@ -49,6 +60,14 @@ const Customers = (props: Props) => {
     <div className="flex flex-col w-[calc(100%-51px)] md:w-[calc(100%-60px)] p-6 gap-y-16">
       <div className="flex flex-col gap-y-16">
         <h1 className="text-2xl font-bold">Customers</h1>
+
+        {userRole === roles?.admin && (
+          <div className="flex justify-between">
+            {customerStatisticsData?.map((item: any) => {
+              return <InfoCard title={item?.title} number={item?.number} />;
+            })}
+          </div>
+        )}
 
         <div className="flex items-center justify-between">
           <SearchInput placeHolder="search" width="w-fit" boxShadow={false} />
@@ -77,7 +96,7 @@ const Customers = (props: Props) => {
         </div>
 
         <div className="flex flex-col gap-y-2 py-2 px-1 ">
-          {data?.map((customer) => {
+          {allCustomersData?.map((customer) => {
             return (
               <div
                 key={customer?.id}

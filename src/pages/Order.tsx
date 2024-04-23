@@ -11,12 +11,13 @@ import {
 } from "@heroicons/react/24/outline";
 import SearchInput from "../components/SearchInput";
 import { ChevronDownIcon, StarIcon } from "@heroicons/react/24/solid";
-import Filter from "../components/CustomSelect";
 import { useSelector } from "react-redux";
 import { selectRole } from "../redux/features/userSlice";
 import { roles } from "../roles";
-import OrderCard from "../components/OrderCard";
+import InfoCard from "../components/InfoCard";
 import { useOrders } from "../hooks/useAllOrders";
+import { useOrderStatistics } from "../hooks/useOrderStatistics";
+import CustomSelect from "../components/CustomSelect";
 
 type Props = {
   homePath: string;
@@ -29,6 +30,9 @@ const Order = ({ homePath = "/home", orderPath = "/orders" }) => {
 
   const OrdersResponse = useOrders()?.data;
   const OrdersData = OrdersResponse?.result;
+
+  const { data: orderStatisticsData } = useOrderStatistics();
+  console.log(orderStatisticsData);
 
   const filterBy = {
     title: "By Status",
@@ -113,18 +117,23 @@ const Order = ({ homePath = "/home", orderPath = "/orders" }) => {
           <h1 className="text-2xl font-bold">Order history</h1>
           {role === roles.admin && (
             <div className="flex justify-between ">
-              <OrderCard />
+              {orderStatisticsData?.map((item: any) => {
+                return (
+                  <InfoCard
+                    title={item?.title}
+                    number={item?.number}
+                    color={item?.color}
+                  />
+                );
+              })}
             </div>
           )}
 
           <div className="flex items-center justify-between">
             <SearchInput placeHolder="search" width="w-fit" boxShadow={false} />
+
             <div className="flex gap-x-8">
-              {/* <Filter
-                filterBy={filterBy}
-                width="min-w-[14rem]"
-                position="right-12"
-              /> */}
+            {/* <CustomSelect/> */}
               {/* <Filter
                 filterBy={filterBy1}
                 width="min-w-[14rem]"

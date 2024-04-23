@@ -16,10 +16,14 @@ import { useAllCountries } from "../hooks/useAllCountries";
 import Table from "../components/Table";
 import { DishCatalog, CountryCatalog } from "../redux/features/dishSlice";
 import CustomSelect from "../components/CustomSelect";
+import { useCountryDishes } from "../hooks/useCountryDishes";
+import { ActiveFilter, selectCountryId } from "../redux/features/filterSlice";
 
 const Home = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
   const [isCheckoutActive, setIsCheckoutActive] = useState<boolean>(false);
+  const [countryDishes, setCountryDishes] = useState(null);
+  const [selectedCountry, setSelectedCountry] = useState("");
 
   const dispatch = useDispatch();
   const cart = useSelector(cartItems);
@@ -28,25 +32,45 @@ const Home = () => {
     setIsActive(() => !isActive);
   };
 
-  const { data, isLoading, isError } = useAllCountries();
+  const { data: allCountriesData, isLoading, isError } = useAllCountries();
 
-
-  const countries = {
-    title: "Select Country",
-    icon: <GlobeAltIcon className="w-6" />,
-    options: data,
-  };
-
-  console.log(countries);
   useEffect(() => {
-    if (data) {
+    if (allCountriesData) {
       dispatch(
         CountryCatalog({
-          countries: data,
+          countries: allCountriesData,
         })
       );
     }
-  }, [data, dispatch]);
+  }, []);
+
+  const { data: countryDishesData, refetch } =
+    useCountryDishes(selectedCountry);
+
+  useEffect(() => {
+    setCountryDishes(countryDishesData);
+    selectedCountry !== "" && refetch();
+  }, [selectedCountry]);
+
+  const handleSelect = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+    // console.log(e.target);
+    const result = await JSON.parse(e.target.value);
+    console.log("result", result);
+    // console.log("country id from event", result.countryid);
+
+    dispatch(
+      ActiveFilter({
+        country: result.name,
+        countryid: result.countryid,
+      })
+    );
+
+    // refetch();
+  };
+
+  const countryId = useSelector(selectCountryId);
+
+  console.log({ countryDishes });
 
   return (
     <div className=" w-[calc(100%-51px)]  md:w-[calc(100%-60px)] bg-[#1d1d1d] text-light h-screen overflow-y-scroll no-scrollbar justify-between p-6  flex ">
@@ -80,9 +104,11 @@ const Home = () => {
 
         <div className="flex flex-col justify-between no-scrollbar h-full  gap-y-14 ">
           <CustomSelect
-            filterBy={countries}
+            title="Select Country"
+            options={allCountriesData}
             width="w-[10rem]"
             bgColor="bg-[#292929]"
+            handleChange={(e) => setSelectedCountry(e.target.value)}
           />
           <Categories />
           <PopularDishes />

@@ -115,7 +115,7 @@ const AddDish = (props: Props) => {
               </td>
             </tr>
             <tr>
-              <td>
+              {/* <td>
                 <label className="font-semibold">Country</label>
                 <br />
                 <CustomSelect
@@ -134,7 +134,7 @@ const AddDish = (props: Props) => {
                   name={"category"}
                   handleChange={handleChange}
                 />
-              </td>
+              </td> */}
               <td className="flex items-center">
                 <div>
                   <input

@@ -4,6 +4,7 @@ const passwordValidRegex: RegExp =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
 const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const phoneNumberRegex: RegExp = /^\d+$/;
 export const authSignupSchema = yup.object().shape({
   username: yup.string().max(15, "too long").required("Required"),
   email: yup
@@ -20,6 +21,12 @@ export const authSignupSchema = yup.object().shape({
     .string()
     .oneOf([yup.ref("password")], "Passwords must match")
     .required("Confirm password is required"),
+  phone_number: yup
+    .string()
+    .min(10)
+    .max(10)
+    .matches(phoneNumberRegex, { message: "Enter a vaild phone number" })
+    .required("Required"),
 });
 
 export const authLoginSchema = yup.object().shape({

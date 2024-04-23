@@ -25,6 +25,8 @@ type TextFieldProps = {
   touchedPostalCode?: boolean;
   cityError?: string;
   touchedCity?: boolean;
+  phoneNumberError?: string;
+  touchedPhoneNumber?: boolean;
 };
 
 type LoginValues = {
@@ -38,6 +40,8 @@ type SignUpValues = {
   email: string;
   password: string;
   confirmPassword: string;
+  phone_number: string;
+  gender: string;
 };
 
 interface FetchProps {
@@ -49,26 +53,17 @@ interface FetchProps {
   };
 }
 
-interface SelectOptionProps {
-  value?: string | number;
-  name?: string;
-  handleBlur?: FocusEventHandler<HTMLInputElement> | undefined;
+interface CustomSelectProps {
   handleChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  filterBy: {
-    title?: string;
-    icon?: JSX.Element;
-    options?: {
-      name: string;
-      quantity?: number;
-      countryid?: number;
-      categoryid?: number;
-      optionId?: number;
-    }[];
-  };
+  name?: string;
+  value?: string | number;
   width?: string;
   bgColor?: string;
-  homePath?: string;
-  addDishPath?: string;
+  title: string;
+  options: {
+    name?: string;
+    countryid?: number;
+  }[];
 }
 
 export {
@@ -76,5 +71,5 @@ export {
   LoginValues,
   SignUpValues,
   FetchProps,
-  SelectOptionProps,
+  CustomSelectProps,
 };

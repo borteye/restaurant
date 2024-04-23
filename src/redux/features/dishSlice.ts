@@ -13,15 +13,12 @@ export const dishSlice = createSlice({
   reducers: {
     DishCatalog: (state, { payload }) => {
       state.dishes = payload.dishes;
-      console.log(payload.dishes);
     },
     CategoryCatalog: (state, { payload }) => {
       state.categories = payload.categories;
-      console.log(payload.categories);
     },
     CountryCatalog: (state, { payload }) => {
       state.countries = payload.countries;
-      console.log(payload.countries);
     },
 
     LogoutLever: (state) => {},

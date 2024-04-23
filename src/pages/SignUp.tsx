@@ -30,6 +30,8 @@ const SignUp = () => {
       email: "",
       password: "",
       confirmPassword: "",
+      phone_number: "",
+      gender: "",
     },
 
     validationSchema: authSignupSchema,
@@ -59,8 +61,15 @@ const SignUp = () => {
     },
   });
 
-  const { values, touched, handleBlur, handleChange, handleSubmit, errors } =
-    formik;
+  const {
+    values,
+    touched,
+    handleBlur,
+    setFieldValue,
+    handleChange,
+    handleSubmit,
+    errors,
+  } = formik;
 
   return (
     <>
@@ -118,6 +127,53 @@ const SignUp = () => {
                     ) : (
                       false
                     )}
+                  </div>
+                </div>
+                <div className="flex flex-col gap-y-2">
+                  <label className="text-sm text-secondary">Phone Number</label>
+                  <div className=" ">
+                    <InputField
+                      type={"text"}
+                      value={values.phone_number}
+                      name={"phone_number"}
+                      handleChange={handleChange}
+                      phoneNumberError={errors.phone_number}
+                      touchedPhoneNumber={touched.phone_number}
+                      handleBlur={handleBlur}
+                      background={"tertiary"}
+                      rounded={"rounded-md"}
+                      width={"w-full"}
+                    />
+                    {errors.phone_number && touched.phone_number ? (
+                      <div className="text-error">{errors.phone_number}</div>
+                    ) : (
+                      false
+                    )}
+                  </div>
+                </div>
+                <div className="flex flex-col gap-y-2">
+                  <label className="text-sm text-secondary">Gender</label>
+                  <div className="flex items-center gap-x-8 ">
+                    <div className="flex items-center gap-2">
+                      <input
+                        name="gender"
+                        value="Male"
+                        checked={values.gender === "Male"}
+                        onChange={() => setFieldValue("gender", "Male")}
+                        type="radio"
+                      />
+                      Male
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <input
+                        name="gender"
+                        value="Female"
+                        checked={values.gender === "Male"}
+                        onChange={() => setFieldValue("gender", "Female")}
+                        type="radio"
+                      />
+                      Female
+                    </div>
                   </div>
                 </div>
                 <div className="flex flex-col gap-y-2">
@@ -193,7 +249,7 @@ const SignUp = () => {
                 </button>
               </div>
               <p>
-                Already have an account?{" "}
+                Already have an account?
                 <span
                   className="text-green-800 font-bold cursor-pointer"
                   onClick={login}
