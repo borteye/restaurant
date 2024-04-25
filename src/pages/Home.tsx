@@ -52,26 +52,6 @@ const Home = () => {
     selectedCountry !== "" && refetch();
   }, [selectedCountry]);
 
-  const handleSelect = async (e: React.ChangeEvent<HTMLSelectElement>) => {
-    // console.log(e.target);
-    const result = await JSON.parse(e.target.value);
-    console.log("result", result);
-    // console.log("country id from event", result.countryid);
-
-    dispatch(
-      ActiveFilter({
-        country: result.name,
-        countryid: result.countryid,
-      })
-    );
-
-    // refetch();
-  };
-
-  const countryId = useSelector(selectCountryId);
-
-  console.log({ countryDishes });
-
   return (
     <div className=" w-[calc(100%-51px)]  md:w-[calc(100%-60px)] bg-[#1d1d1d] text-light h-screen overflow-y-scroll no-scrollbar justify-between p-6  flex ">
       <div
@@ -104,9 +84,10 @@ const Home = () => {
 
         <div className="flex flex-col justify-between no-scrollbar h-full  gap-y-14 ">
           <CustomSelect
-            title="Select Country"
+            title="Select Country For Dishes"
             options={allCountriesData}
-            width="w-[10rem]"
+            width="w-[15rem]"
+            name="country"
             bgColor="bg-[#292929]"
             handleChange={(e) => setSelectedCountry(e.target.value)}
           />

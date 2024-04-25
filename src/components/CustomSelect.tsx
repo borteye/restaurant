@@ -16,22 +16,21 @@ const CustomSelect: FC<CustomSelectProps> = ({
   title,
   options,
 }) => {
-  const [select, setSelect] = useState<string | undefined>("");
-  const [initialValue, setInitialValue] = useState("");
-  console.log(options)
-
   return (
     <select
       onChange={handleChange}
       name={name}
+      value={value}
       className={`${width} ${bgColor} border-none outline-none border rounded-xl font-semibold py-2 px-3 items-center gap-x-2  shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]`}
     >
-      <option value={initialValue} className={select ? "" : "hidden"}>
-        {title}
-      </option>
+      <option value="">{title}</option>
       {options?.map((item, i) => {
         return (
-          <option key={i} value={item.countryid?.toString()} className="py-10">
+          <option
+            key={i}
+            value={item?.countryid?.toString() || item?.categoryid}
+            className="py-10"
+          >
             {item?.name}
           </option>
         );

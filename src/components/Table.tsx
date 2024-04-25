@@ -17,6 +17,7 @@ type Props = {
 const Table: FC<Props> = ({ data, columns }) => {
   const [showOrderDetails, setShowOrderDetails] = useState<boolean>(false);
   const [orderId, setOrderId] = useState<number>();
+  const [selectOrder, setSelectOrder] = useState<number>();
 
   const dispatch = useDispatch();
 
@@ -25,6 +26,9 @@ const Table: FC<Props> = ({ data, columns }) => {
 
   const handleSelectOrder = (orderDishes: Item[], orderid: number) => {
     setShowOrderDetails(orderId === orderid ? !showOrderDetails : true);
+
+    setSelectOrder(orderid);
+
     dispatch(ActiveOrderHistory(orderDishes));
   };
 
@@ -38,7 +42,11 @@ const Table: FC<Props> = ({ data, columns }) => {
               const listItemClasses = isLastItem
                 ? "min-w-[9rem]"
                 : "min-w-[15rem]";
-              return <p  key={index} className={listItemClasses}>{col?.header}</p>;
+              return (
+                <p key={index} className={listItemClasses}>
+                  {col?.header}
+                </p>
+              );
             })}
         </div>
 
@@ -52,7 +60,11 @@ const Table: FC<Props> = ({ data, columns }) => {
                     setOrderId(orders?.orderid);
                     handleSelectOrder(orders?.dishes, orders?.orderid);
                   }}
-                  className=" flex items-center gap-x-6 px-8 cursor-pointer hover:bg-[#F4F7F9] py-6 min-w-fit border-b justify-between"
+                  className={` ${
+                    selectOrder === orders?.orderid && showOrderDetails === true
+                      ? "bg-[#F4F7F9]"
+                      : ""
+                  } flex items-center gap-x-6 px-8 cursor-pointer hover:bg-[#F4F7F9] py-6 min-w-fit border-b justify-between`}
                 >
                   {columns &&
                     columns?.map((col: any, index: any) => {
@@ -99,7 +111,7 @@ const Table: FC<Props> = ({ data, columns }) => {
               key={dish?.dishid}
             >
               <div className="flex items-center gap-x-6">
-                <img src={burger} alt="" className="w-16" />
+                <img src={dish?.imageurl} alt="" className="w-16" />
                 <div>
                   <p className="text-black">{dish?.name}</p>
                   <p className="text-sm text-secondary">${dish?.price}</p>

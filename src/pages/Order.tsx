@@ -11,13 +11,17 @@ import {
 } from "@heroicons/react/24/outline";
 import SearchInput from "../components/SearchInput";
 import { ChevronDownIcon, StarIcon } from "@heroicons/react/24/solid";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectRole } from "../redux/features/userSlice";
 import { roles } from "../roles";
 import InfoCard from "../components/InfoCard";
 import { useOrders } from "../hooks/useAllOrders";
 import { useOrderStatistics } from "../hooks/useOrderStatistics";
 import CustomSelect from "../components/CustomSelect";
+import Table1 from "../components/Table1";
+import totalPrice from "../utils/totalPrice";
+import { ActiveOrderHistory, selectedOrder } from "../redux/features/orderSlice";
+import { Item } from "../types/dishes";
 
 type Props = {
   homePath: string;
@@ -25,6 +29,22 @@ type Props = {
 };
 
 const Order = ({ homePath = "/home", orderPath = "/orders" }) => {
+  const [showOrderDetails, setShowOrderDetails] = useState<boolean>(false);
+  const [orderId, setOrderId] = useState<number>(0);
+  const [selectOrder, setSelectOrder] = useState<number>();
+
+  const dispatch = useDispatch();
+
+  const orderDetails = useSelector(selectedOrder);
+  const total = totalPrice(orderDetails);
+
+  const handleSelectOrder = (orderDishes: Item[], orderid: number) => {
+    setShowOrderDetails(orderId === orderid ? !showOrderDetails : true);
+    setSelectOrder(orderid);
+    dispatch(ActiveOrderHistory(orderDishes));
+  };
+
+
   const { pathname } = window.location;
   const role = useSelector(selectRole);
 
@@ -94,6 +114,8 @@ const Order = ({ homePath = "/home", orderPath = "/orders" }) => {
     },
   ];
 
+  const message = ""
+
   return (
     <section
       className={`flex flex-col ${
@@ -146,9 +168,18 @@ const Order = ({ homePath = "/home", orderPath = "/orders" }) => {
         false
       )}
 
-      <Table
+      <Table1
         data={OrdersData}
         columns={role === roles?.admin ? adminColumns : customerColumns}
+        borderBottom="border-b"
+        message="No orders found"
+        orderPage={true}
+        orderDetails={orderDetails}
+        total={total}
+        setOrderId={setOrderId}
+        selectOrder={selectOrder}
+        handleSelectOrder={handleSelectOrder}
+        showOrderDetails={showOrderDetails}
       />
     </section>
   );

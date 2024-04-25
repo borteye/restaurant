@@ -16,15 +16,6 @@ const AddDish = (props: Props) => {
   const countries = useSelector(selectCountries);
   const categories = useSelector(selectCategories);
 
-  const country = {
-    title: "Select Country",
-    options: countries,
-  };
-  const category = {
-    title: "Select Category",
-    options: categories,
-  };
-
   const formik = useFormik({
     initialValues: {
       dishName: "",
@@ -115,13 +106,14 @@ const AddDish = (props: Props) => {
               </td>
             </tr>
             <tr>
-              {/* <td>
+              <td>
                 <label className="font-semibold">Country</label>
                 <br />
                 <CustomSelect
-                  filterBy={country}
-                  value={values.country}
-                  name={"country"}
+                  title="Select Country"
+                  name="country"
+                  options={countries}
+                  width="w-[10rem]"
                   handleChange={handleChange}
                 />
               </td>
@@ -129,12 +121,14 @@ const AddDish = (props: Props) => {
                 <label className="font-semibold">Category</label>
                 <br />
                 <CustomSelect
-                  filterBy={category}
+                  title="Food Category"
+                  options={categories}
                   value={values.category}
                   name={"category"}
+                  width="w-[10rem]"
                   handleChange={handleChange}
                 />
-              </td> */}
+              </td>
               <td className="flex items-center">
                 <div>
                   <input

@@ -17,7 +17,7 @@ const PopularDishes = (props: Props) => {
   const dispatch = useDispatch();
   const dishCatalog = useSelector(selectDishes);
   const getDishes = () => {
-    return fetch(`http://localhost:5000/all-dishes`).then((res) => res.json());
+    return fetch(`http://localhost:5000/dishes`).then((res) => res.json());
   };
 
   const { data } = useQuery({

@@ -15,6 +15,7 @@ interface orderDetails {
       quantity: number;
       price: number;
       totalPrice: number;
+      imageUrl: string;
     }[];
   }[];
 }
@@ -33,6 +34,7 @@ interface orderItems {
     quantity: number;
     price: number;
     totalPrice: number;
+    imageUrl: string;
   }[];
 }
 

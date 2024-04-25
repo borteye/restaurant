@@ -35,7 +35,7 @@ interface PopularDishesCardProps {
     available: number;
     countryid: number;
     categoryid: number;
-    imageurl: string
+    imageurl: string;
   };
 }
 
@@ -73,7 +73,7 @@ interface DishDetails {
       available: number;
       categoryid: number;
       countryid: number;
-      imageurl: string
+      imageurl: string;
     }[];
     categories: BasicCategoryInfo[];
     countries: BasicCountryInfo[];
@@ -88,7 +88,7 @@ interface CartDetails {
       quantity: number;
       price: number;
       totalPrice: number;
-      imageurl: string
+      imageurl: string;
     }[];
   };
 }
@@ -99,6 +99,7 @@ type Item = {
   price: number;
   quantity: number;
   totalPrice: number;
+  imageurl: string;
 };
 
 interface CartState {
@@ -112,7 +113,7 @@ interface CartCardProps {
     quantity: number;
     price: number;
     totalPrice: number;
-    imageurl: string
+    imageurl: string;
   };
 }
 

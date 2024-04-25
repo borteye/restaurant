@@ -63,6 +63,7 @@ interface CustomSelectProps {
   options: {
     name?: string;
     countryid?: number;
+    categoryid?: number;
   }[];
 }
 

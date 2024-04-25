@@ -1,7 +1,7 @@
 import React, { FC, useReducer, useState } from "react";
 import burger from "../../assets/burger.png";
 import { PopularDishesCardProps } from "../../types/dishes";
-import { selectCountryId } from "../../redux/features/filterSlice";
+import { selectCountry } from "../../redux/features/filterSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { ShoppingCartIcon, PlusIcon } from "@heroicons/react/24/outline";
 import {

@@ -14,16 +14,25 @@ import { useAllCustomers } from "../hooks/useAllCustomers";
 import { useDeleteCustomer } from "../hooks/useDeleteCustomer";
 import InfoCard from "../components/InfoCard";
 import { useCustomerStatistics } from "../hooks/useCustomerStatistics";
+import Table1 from "../components/Table1";
 type Props = {};
 
 const Customers = () => {
   const [options, setOptions] = useState<boolean>(false);
-  const [customerId, setCustomerId] = useState<number>();
+  const [customerId, setCustomerId] = useState<number>(0);
 
   const userRole = useSelector(selectRole);
 
-  const handleToggle = (customerId: number) => {
-    setOptions(customerId === customerId ? !options : true);
+ 
+  const handleToggle = (customerid: number) => {
+    console.log(customerid);
+    setOptions(customerId === customerid ? !options : true);
+  };
+
+  const handleDeleteCustomer = (id: number) => {
+    setCustomerId(id);
+    mutate({ id });
+    setOptions(false);
   };
 
   const {
@@ -33,7 +42,6 @@ const Customers = () => {
   } = useAllCustomers();
 
   const { data: customerStatisticsData } = useCustomerStatistics();
-  console.log(customerStatisticsData);
 
   const onSuccess = (data: any) => {
     const { success, error } = data;
@@ -50,11 +58,33 @@ const Customers = () => {
     customerId as number
   );
 
-  const handleDeleteCustomer = (id: number) => {
-    setCustomerId(id);
-    mutate({ id });
-    setOptions(false);
-  };
+  const shadow =
+    "shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]";
+  const margin = "mt-4";
+  const rounded = "rounded-xl";
+
+  const customersColumns = [
+    {
+      field: "username",
+      header: "Name",
+    },
+    {
+      field: "email",
+      header: "Email",
+    },
+    {
+      field: "phone_number",
+      header: "Phone Number",
+    },
+    {
+      field: "gender",
+      header: "Gender",
+    },
+    {
+      field: "status",
+      header: "Status",
+    },
+  ];
 
   return (
     <div className="flex flex-col w-[calc(100%-51px)] md:w-[calc(100%-60px)] p-6 gap-y-16">
@@ -86,16 +116,28 @@ const Customers = () => {
         </div>
       </div>
       <div className="overflow-x-scroll  w-full  h-screen no-scrollbar">
-        <div className="flex justify-between gap-x-6 pr-8 px-8 min-w-fit border-b-2 items-center font-semibold py-6 ">
+        <Table1
+          columns={customersColumns}
+          data={allCustomersData}
+          margin={margin}
+          shadow={shadow}
+          rounded={rounded}
+          customersPage={true}
+          handleToggle={handleToggle}
+          handleDeleteCustomer={handleDeleteCustomer}
+          options={options}
+          setCustomerId={setCustomerId}
+        />
+        {/* <div className="flex justify-between gap-x-6 pr-8 px-8 min-w-fit border-b-2 items-center font-semibold py-6 ">
           <p className=" min-w-[15rem]">Name</p>
           <p className="min-w-[15rem] ">Email</p>
           <p className="min-w-[15rem] ">Phone number</p>
           <p className="min-w-[9rem] ">Gender</p>
           <p className="min-w-[9rem] ">Status</p>
           <p className="w-7"></p>
-        </div>
+        </div> */}
 
-        <div className="flex flex-col gap-y-2 py-2 px-1 ">
+        {/* <div className="flex flex-col gap-y-2 py-2 px-1 ">
           {allCustomersData?.map((customer) => {
             return (
               <div
@@ -138,7 +180,7 @@ const Customers = () => {
               </div>
             );
           })}
-        </div>
+        </div> */}
       </div>
     </div>
   );

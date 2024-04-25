@@ -31,23 +31,13 @@ const Cart = ({ isActive, setIsActive, setIsCheckoutActive }: Props) => {
         isActive ? "flex" : "hidden"
       } flex-col justify-between top-4 inset-y-4 right-4`}
     >
-      {/* <div className="bg-[#6D6D6D] p-6 flex flex-col gap-y-4 rounded-3xl">
-        <h1 className="text-2xl font-semibold ">DELIVERY ADDRESS</h1>
-        <p className="text-sm flex items-center gap-x-2">
-          <MapPinIcon className="w-5" />
-          Po. 1478, Street No. 52, West New York
-        </p>
-        <p className="text-sm flex items-center gap-x-2">
-          <ClockIcon className="w-5" />
-          20 min
-        </p>
-      </div> */}
+    
       <p className="flex items-center gap-x-3">
         <ShoppingCartIcon className="w-7" />
         Cart
       </p>
       <div className="flex flex-col gap-y-10  ">
-        {cart.length ? (
+        {cart?.length ? (
           cart?.map((dish, i) => {
             return <Card dish={dish} key={i} />;
           })
@@ -60,7 +50,7 @@ const Cart = ({ isActive, setIsActive, setIsCheckoutActive }: Props) => {
       <div className="text-sm">
         <div className="flex justify-between">
           <p>Sub Total</p>
-          <p>${total.toFixed(2)}</p>
+          <p>${total?.toFixed(2)}</p>
         </div>
         <div className="flex justify-between">
           <p>Delivery Charge</p>
@@ -70,7 +60,7 @@ const Cart = ({ isActive, setIsActive, setIsCheckoutActive }: Props) => {
         <hr className="border-t-2 border-[#6D6D6D] my-6" />
         <div className="flex text-xl justify-between font-semibold">
           <p>TOTAL</p>
-          <p>${total.toFixed(2)}</p>
+          <p>${total?.toFixed(2)}</p>
         </div>
       </div>
       <button

@@ -12,7 +12,7 @@ const InfoCard = ({ title, number, color }: Props) => {
     <div className="flex items-center gap-x-6 text-light">
       <div
         className={`${
-          color ? `bg-[${color}]`: "bg-secondary"
+          color ? `bg-[${color}]` : "bg-secondary"
         }  w-fit p-3 rounded-xl`}
       >
         <StarIcon className="w-7" />
